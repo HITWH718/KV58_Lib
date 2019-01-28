@@ -1,7 +1,4 @@
-
 #include "gpio.h"
-#include "MKV58F24.h"
-#include "assert.h"
 
 static GPIO_Type * const GPIOX[] = GPIO_BASE_PTRS;
 
@@ -15,7 +12,7 @@ static GPIO_Type * const GPIOX[] = GPIO_BASE_PTRS;
 void gpio_init(PTXn_e ptxn, GPIO_CFG cfg, uint8_t data)
 {
     port_init(ptxn, AsGpio);
-    
+
     uint8_t ptx, ptn;
 
     ptx = PTX(ptxn); //GPIO模块号
