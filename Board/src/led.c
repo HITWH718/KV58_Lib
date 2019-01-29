@@ -5,26 +5,26 @@ void led_init(led_t led)
 {
     if(led1==led)
     {
-        gpio_init(PTA17,gpo,1);
+        gpio_init(PTA17,GPO,1);
     }
     else if(led2==led)
     {
-        gpio_init(PTC0,gpo,1);
+        gpio_init(PTC0,GPO,1);
     }
     else if(led3==led)
     {
-        gpio_init(PTD15,gpo,1);
+        gpio_init(PTD15,GPO,1);
     }
     else if(led4==led)
     {
-        gpio_init(PTE29,gpo,1);
+        gpio_init(PTE29,GPO,1);
     }
     else if(led_all==led)
     {
-        gpio_init(PTA17,gpo,1);
-        gpio_init(PTC0,gpo,1);
-        gpio_init(PTD15,gpo,1);
-        gpio_init(PTE29,gpo,1);
+        gpio_init(PTA17,GPO,1);
+        gpio_init(PTC0,GPO,1);
+        gpio_init(PTD15,GPO,1);
+        gpio_init(PTE29,GPO,1);
     }
 }
 
