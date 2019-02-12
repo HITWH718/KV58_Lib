@@ -2091,6 +2091,12 @@
     <group>
         <name>Board</name>
         <file>
+            <name>$PROJ_DIR$\Board\src\dma.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Board\inc\dma.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Board\src\gpio.c</name>
         </file>
         <file>

@@ -3,7 +3,7 @@
 
 static PORT_Type * const PORTx[] = PORT_BASE_PTRS;
 
-void port_init(PTXn_e ptxn, port_mux_t mux)
+void port_init(PTXn_e ptxn, uint32_t mux)
 {
     //打开端口时钟
     SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK<<PTX(ptxn);

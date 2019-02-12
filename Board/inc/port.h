@@ -3,24 +3,63 @@
 
 #include "fsl_common.h"
 
+
+//PORT寄存器
+#define PORT_PCR_REG(base,index)                 ((base)->PCR[index])
+#define PORT_GPCLR_REG(base)                     ((base)->GPCLR)
+#define PORT_GPCHR_REG(base)                     ((base)->GPCHR)
+#define PORT_ISFR_REG(base)                      ((base)->ISFR)
+#define PORT_DFER_REG(base)                      ((base)->DFER)
+#define PORT_DFCR_REG(base)                      ((base)->DFCR)
+#define PORT_DFWR_REG(base)                      ((base)->DFWR)
+//SIM寄存器
+#define SIM_SCGC1                                ((SIM)->SCGC1)
+#define SIM_SCGC2                                ((SIM)->SCGC2)
+#define SIM_SCGC3                                ((SIM)->SCGC3)
+#define SIM_SCGC4                                ((SIM)->SCGC4)
+#define SIM_SCGC5                                ((SIM)->SCGC5)
+#define SIM_SCGC6                                ((SIM)->SCGC6)
+#define SIM_SCGC7                                ((SIM)->SCGC7)
+
 typedef enum _port_mux
-{
-    Disabled = 0U,         /*!< Corresponding pin is disabled, but is used as an analog pin. */
-    AsGpio = 1U,           /*!< Corresponding pin is configured as GPIO. */
-    Alt2 = 2U,             /*!< Chip-specific */
-    Alt3 = 3U,             /*!< Chip-specific */
-    Alt4 = 4U,             /*!< Chip-specific */
-    Alt5 = 5U,             /*!< Chip-specific */
-    Alt6 = 6U,             /*!< Chip-specific */
-    Alt7 = 7U,             /*!< Chip-specific */
-    Alt8 = 8U,             /*!< Chip-specific */
-    Alt9 = 9U,             /*!< Chip-specific */
-    Alt10 = 10U,           /*!< Chip-specific */
-    Alt11 = 11U,           /*!< Chip-specific */
-    Alt12 = 12U,           /*!< Chip-specific */
-    Alt13 = 13U,           /*!< Chip-specific */
-    Alt14 = 14U,           /*!< Chip-specific */
-    Alt15 = 15U,           /*!< Chip-specific */
+{ 
+  
+  Disabled = 0U,         /*!< Corresponding pin is disabled, but is used as an analog pin. */
+  AsGpio = 1U,           /*!< Corresponding pin is configured as GPIO. */
+  Alt2 = 2U,             /*!< Chip-specific */
+  Alt3 = 3U,             /*!< Chip-specific */
+  Alt4 = 4U,             /*!< Chip-specific */
+  Alt5 = 5U,             /*!< Chip-specific */
+  Alt6 = 6U,             /*!< Chip-specific */
+  Alt7 = 7U,             /*!< Chip-specific */
+  Alt8 = 8U,             /*!< Chip-specific */
+  Alt9 = 9U,             /*!< Chip-specific */
+  Alt10 = 10U,           /*!< Chip-specific */
+  Alt11 = 11U,           /*!< Chip-specific */
+  Alt12 = 12U,           /*!< Chip-specific */
+  Alt13 = 13U,           /*!< Chip-specific */
+  Alt14 = 14U,           /*!< Chip-specific */
+  Alt15 = 15U,           /*!< Chip-specific */
+  
+  IRQ_ZERO     = PORT_PCR_IRQC(0x08),     //低电平触发
+  IRQ_RISING   = PORT_PCR_IRQC(0x09),    //上升沿触发
+  IRQ_FALLING  = PORT_PCR_IRQC(0x0A),   //下降沿触发
+  IRQ_EITHER   = PORT_PCR_IRQC(0x0B),  //跳变沿触发
+  IRQ_ONE      = PORT_PCR_IRQC(0x0C),  //高电平触发
+  
+  //DMA请求
+  DMA_RISING   = PORT_PCR_IRQC(0x01),   //上升沿触发
+  DMA_FALLING  = PORT_PCR_IRQC(0x02),   //下降沿触发
+  DMA_EITHER   = PORT_PCR_IRQC(0x03),   //跳变沿触发
+  
+  HDS          = PORT_PCR_DSE(0x01),    //输出高驱动能力
+  OD           = PORT_PCR_ODE(0x01),    //漏极输出
+  PF           = PORT_PCR_PFE(0x01),    //带无源滤波器
+  SSR          = PORT_PCR_SRE(0x01),     //输出慢变化率 
+  
+  //下拉上拉选择
+  PULLDOWN     = 0x02 << PORT_PCR_PS_SHIFT,     //下拉
+  PULLUP       = 0x03 << PORT_PCR_PS_SHIFT,     //上拉
 } port_mux_t;
 
 typedef enum _PTXn
@@ -60,8 +99,9 @@ typedef enum _PTn
 //PTx = PTxn / 32 ; PTn = PTxn & 31
 #define PTX(PTxn)           ((PTxn)>>5)
 #define PTn(PTxn)           ((PTxn)&0x1f)
+#define PORTX_BASE(PTxn)     PORTx[PTX(PTxn)]       //PORT模块的地址
 
-extern void port_init(PTXn_e ptxn, port_mux_t mux);
+extern void port_init(PTXn_e ptxn, uint32_t mux);
 extern void port_cfg();
 
 #endif
