@@ -2109,6 +2109,12 @@
             <name>$PROJ_DIR$\Board\src\port.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\Board\src\Systick.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Board\inc\Systick.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Board\src\uart.c</name>
         </file>
     </group>
