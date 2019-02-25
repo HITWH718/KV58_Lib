@@ -55,7 +55,7 @@ void gpio_ddr (PTXn_e ptxn, GPIO_CFG cfg)
     else
     {
         //设置端口方向为输出
-       GPIOX[PTX(ptxn)]->PDDR &= ~(1U << PTn(ptxn)); // GPIO PDDR 管脚号 置1，即对应管脚配置为端口方向输出
+       GPIOX[PTX(ptxn)]->PDDR |= (1U << PTn(ptxn)); // GPIO PDDR 管脚号 置1，即对应管脚配置为端口方向输出
     }
 }
 
