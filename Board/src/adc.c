@@ -137,6 +137,16 @@ static void adc_start(ADCn_Ch_e adcn_ch, ADC_nbit bit)
                     | ADC_CFG2_ADLSTS(0)           //长采样时间选择，ADCK为4+n个额外循环，额外循环，0为20，1为12，2为6，3为2
                 );
 
+    if(ch == ADC0_SE5b || ch == ADC0_SE6b || ch == ADC0_SE7b )
+    {
+        ADC0->CFG2 |= ADC_CFG2_MUXSEL_MASK;
+        ch -= 8;
+    }
+    else
+    {
+        ADC0->CFG2 &= ~ADC_CFG2_MUXSEL_MASK;
+    }
+
     //写入 SC1A 启动转换
     ADC0->SC1[0] = (0
                     | ADC_SC1_AIEN_MASK          // 转换完成中断,0为禁止，1为使能
