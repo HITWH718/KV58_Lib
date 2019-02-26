@@ -8,5 +8,7 @@
 #include "pit.h"
 #include "dma.h"
 #include "Systick.h"
+#include "clock.h"
+#include "ftm.h"
 
 #endif
