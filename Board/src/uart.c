@@ -104,11 +104,11 @@ void uart_init(UARTn_e uartn, uint32_t baud)
     UARTn[uartn]->C2 &= ~(UART_C2_TE_MASK | UART_C2_RE_MASK);
     
     /* Calculate the baud rate modulo divisor, sbr*/
-    sbr = (uint16_t)(237500000 / 2 / (baud * 16));
+    sbr = (uint16_t)(fastperiphral_clk_khz * 1000 / (baud * 16));
     if(sbr > 0x1FFF)sbr = 0x1FFF;   //sbr[12:0]
     
     /* Calcute brfa */
-    brfa = 2 * ((237500000 / baud) - (sbr * 16));
+    brfa = 2 * ((2 * fastperiphral_clk_khz * 1000 / baud) - (sbr * 16));
     if(brfa > 0x1F)brfa = 0x1F; //brfa[4:0]
     
     /* Write the sbr value to the BDH and BDL registers*/
@@ -223,5 +223,9 @@ void UART0_RX_TX_IRQHandler(void)
     }
 }
 
-
+int fputc(int ch,FILE*stream)
+{
+    uart_putchar(DEBUG_UART,(char)ch);
+    return ch;
+}
 

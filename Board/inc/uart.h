@@ -13,6 +13,10 @@ typedef enum _UARTn
     uart5,
 }UARTn_e;
 
+#define DEBUG_UART  uart0
+#define DEBUG_BAUD  115200
+
+
 extern void uart_init(UARTn_e uartn,uint32_t boud);
 extern void uart_deinit(UARTn_e uartn);
 extern void uart_getbuff(UARTn_e uartn, uint8_t *data, uint32_t len);
