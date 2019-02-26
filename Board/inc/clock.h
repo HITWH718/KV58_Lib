@@ -1,7 +1,7 @@
 #ifndef _CLOCK_H_
 #define _CLOCK_H_
 
-#include "fsl_common.h"
+#include "MKV58F24.h"
 
 
 extern uint32_t mcgout_clk_khz;

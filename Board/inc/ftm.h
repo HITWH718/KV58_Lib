@@ -1,7 +1,7 @@
 #ifndef _FTM_H_
 #define _FTM_H_
 
-#include "fsl_common.h"
+#include "MKV58F24.h"
 
 #define FTM0_PRECISON 1000u
 #define FTM1_PRECISON 1000u

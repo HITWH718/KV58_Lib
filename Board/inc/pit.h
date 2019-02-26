@@ -1,7 +1,7 @@
 #ifndef _PIT_H_
 #define _PIT_H_
 
-#include "fsl_common.h"
+#include "MKV58F24.h"
 
 #define pit_flag_clr(pitn)  PIT->CHANNEL[pitn].TFLG = PIT_TFLG_TIF_MASK
 

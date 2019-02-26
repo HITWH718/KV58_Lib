@@ -1,6 +1,8 @@
 
 #include "uart.h"
 #include "port_cfg.h"
+#include "stdio.h"
+#include "clock.h"
 
 static UART_Type * const UARTn[] = UART_BASE_PTRS;
 
