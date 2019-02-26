@@ -47,13 +47,10 @@
 #define FTM3_CH6_PIN    PTE11   //PTC10,PTE11
 #define FTM3_CH7_PIN    PTE12   //PTC11,PTE12
 
-//-----------------------I2C-------------------------
-#define I2C0_SCL
-#define I2C0_SDA
+#define FTM1_QDPHA      PTE20   //PTA12,PTB0,PTE20      
+#define FTM1_QDPHB      PTE21   //PTA13,PTB1,PTE21
 
-#define I2C1_SCL
-#define I2C1_SDA
-
-//-----------------------SPI-------------------------
+#define FTM2_QDPHA      PTE22   //PTA1,PTA10,PTE18,PTE22    
+#define FTM2_QDPHB      PTE23   //PTA2,PTA11,PTB19,PTE23
 
 #endif
