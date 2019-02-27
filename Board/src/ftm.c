@@ -291,9 +291,9 @@ void ftm_quad_init(FTMn_e ftmn)
     FTMn[ftmn]->CNTIN = 0;
     FTMn[ftmn]->MOD = FTM_MOD_MOD_MASK;
     /* Select QD Mode */
-    FTMn[ftmn]->QDCTRL &= ~FTM_QDCTRL_QUADMODE_MASK;
+    FTMn[ftmn]->QDCTRL |= FTM_QDCTRL_QUADMODE_MASK;
     /* Enable */
-    FTMn[ftmn]->QDCTRL &= ~FTM_QDCTRL_QUADEN_MASK;
+    FTMn[ftmn]->QDCTRL |= FTM_QDCTRL_QUADEN_MASK;
     /* Init The Counter*/
     FTMn[ftmn]->CNT = 0;
 }
