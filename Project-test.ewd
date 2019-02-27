@@ -88,7 +88,7 @@
                 </option>
                 <option>
                     <name>OCLastSavedByProductVersion</name>
-                    <state>8.32.1.18618</state>
+                    <state>8.32.2.19370</state>
                 </option>
                 <option>
                     <name>UseFlashLoader</name>
@@ -749,7 +749,7 @@
                 </option>
                 <option>
                     <name>JLinkInitialSpeed</name>
-                    <state>32</state>
+                    <state>1000</state>
                 </option>
                 <option>
                     <name>CCDoJlinkMultiTarget</name>
@@ -896,7 +896,7 @@
                 </option>
                 <option>
                     <name>CCCpuClockEdit</name>
-                    <state>72.0</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCSwoClockAuto</name>

@@ -186,7 +186,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
     FTMn[ftmn]->CONTROLS[ch].CnSC = FTM_CnSC_MSB_MASK | FTM_CnSC_ELSB_MASK;
     /* Set the clock prescale factor */
     FTMn[ftmn]->SC |= FTM_SC_PS(7);
-    freq_ftm = 237500000/2/2^7;
+    freq_ftm = (237500000/256);
     /* Select the clock source */
     FTMn[ftmn]->SC |= FTM_SC_CLKS(1);
     /* Calculate the MOD */
