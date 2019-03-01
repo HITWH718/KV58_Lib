@@ -2378,6 +2378,9 @@
     <group>
         <name>Board</name>
         <file>
+            <name>$PROJ_DIR$\Board\src\adc.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Board\src\clock.c</name>
         </file>
         <file>
@@ -2385,6 +2388,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\Board\inc\dma.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Board\src\ftm.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Board\src\gpio.c</name>

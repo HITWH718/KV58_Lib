@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>CortexM7MPS2FVP	Cortex-M7 MPS2 FVP</state>
+                    <state>MKV58F1M0xxx24	NXP MKV58F1M0xxx24</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,12 +138,12 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>CortexM7MPS2FVP	Cortex-M7 MPS2 FVP</state>
+                    <state>MKV58F1M0xxx24	NXP MKV58F1M0xxx24</state>
                 </option>
                 <option>
                     <name>FPU2</name>
                     <version>0</version>
-                    <state>7</state>
+                    <state>6</state>
                 </option>
                 <option>
                     <name>NrRegs</name>
@@ -2091,6 +2091,9 @@
     <group>
         <name>Board</name>
         <file>
+            <name>$PROJ_DIR$\Board\src\adc.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Board\src\clock.c</name>
         </file>
         <file>
@@ -2098,6 +2101,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\Board\inc\dma.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Board\src\ftm.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Board\src\gpio.c</name>
