@@ -66,7 +66,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>8.32.1.18618</state>
+                    <state>8.32.2.19370</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>CortexM7MPS2FVP	Cortex-M7 MPS2 FVP</state>
+                    <state>MKV58F1M0xxx24	NXP MKV58F1M0xxx24</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -116,7 +116,7 @@
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
-                    <version>26</version>
+                    <version>27</version>
                     <state>41</state>
                 </option>
                 <option>
@@ -133,17 +133,17 @@
                 </option>
                 <option>
                     <name>CoreVariant</name>
-                    <version>26</version>
+                    <version>27</version>
                     <state>41</state>
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>CortexM7MPS2FVP	Cortex-M7 MPS2 FVP</state>
+                    <state>MKV58F1M0xxx24	NXP MKV58F1M0xxx24</state>
                 </option>
                 <option>
                     <name>FPU2</name>
                     <version>0</version>
-                    <state>7</state>
+                    <state>6</state>
                 </option>
                 <option>
                     <name>NrRegs</name>
@@ -156,7 +156,7 @@
                 </option>
                 <option>
                     <name>GFPUCoreSlave2</name>
-                    <version>26</version>
+                    <version>27</version>
                     <state>41</state>
                 </option>
                 <option>
@@ -1162,7 +1162,7 @@
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
-                    <version>26</version>
+                    <version>27</version>
                     <state>38</state>
                 </option>
                 <option>
@@ -1179,7 +1179,7 @@
                 </option>
                 <option>
                     <name>CoreVariant</name>
-                    <version>26</version>
+                    <version>27</version>
                     <state>38</state>
                 </option>
                 <option>
@@ -1202,7 +1202,7 @@
                 </option>
                 <option>
                     <name>GFPUCoreSlave2</name>
-                    <version>26</version>
+                    <version>27</version>
                     <state>38</state>
                 </option>
                 <option>
@@ -2091,10 +2091,19 @@
     <group>
         <name>Board</name>
         <file>
+            <name>$PROJ_DIR$\Board\src\adc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Board\src\clock.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Board\src\dma.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Board\inc\dma.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Board\src\ftm.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Board\src\gpio.c</name>

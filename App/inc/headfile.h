@@ -10,5 +10,7 @@
 #include "Systick.h"
 #include "clock.h"
 #include "ftm.h"
+#include "adc.h"
+#include "stdio.h"
 
 #endif
