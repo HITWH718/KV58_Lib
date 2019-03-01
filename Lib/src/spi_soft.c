@@ -1,4 +1,4 @@
-#include "SPI_software.h"
+#include "spi_soft.h"
 #include "port.h"
 
 /*!

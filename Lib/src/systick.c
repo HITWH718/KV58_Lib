@@ -1,4 +1,4 @@
-#include "Systick.h"
+#include "systick.h"
 #include "headfile.h"
 
 extern uint32_t SystemCoreClock;
