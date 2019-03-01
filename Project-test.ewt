@@ -2377,42 +2377,6 @@
     </group>
     <group>
         <name>Board</name>
-        <file>
-            <name>$PROJ_DIR$\Board\src\adc.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\clock.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\dma.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\inc\dma.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\ftm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\gpio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\led.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\pit.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\port.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\Systick.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\inc\Systick.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Board\src\uart.c</name>
-        </file>
     </group>
     <group>
         <name>Chip</name>
@@ -2432,130 +2396,58 @@
             <name>Fatfs</name>
         </group>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_adc16.c</name>
+            <name>$PROJ_DIR$\Lib\src\adc.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_aoi.c</name>
+            <name>$PROJ_DIR$\Lib\src\clock.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Lib\src\dma.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Lib\src\flash.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Lib\src\fsl_clock.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_cmp.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\Lib\src\fsl_common.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_crc.c</name>
+            <name>$PROJ_DIR$\Lib\src\ftm.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_dac.c</name>
+            <name>$PROJ_DIR$\Lib\src\gpio.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_dmamux.c</name>
+            <name>$PROJ_DIR$\Lib\src\iic.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_dspi.c</name>
+            <name>$PROJ_DIR$\Lib\src\iic_soft.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_dspi_edma.c</name>
+            <name>$PROJ_DIR$\Lib\src\led.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_edma.c</name>
+            <name>$PROJ_DIR$\Lib\src\lptmr.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_enc.c</name>
+            <name>$PROJ_DIR$\Lib\src\pit.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_enet.c</name>
+            <name>$PROJ_DIR$\Lib\src\port.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_ewm.c</name>
+            <name>$PROJ_DIR$\Lib\src\spi.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_flexbus.c</name>
+            <name>$PROJ_DIR$\Lib\src\spi_soft.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_flexcan.c</name>
+            <name>$PROJ_DIR$\Lib\src\systick.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_flexcan_edma.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_ftfx_cache.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_ftfx_controller.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_ftfx_flash.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_ftfx_flexnvm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_ftm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_gpio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_hsadc.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_i2c.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_i2c_edma.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_llwu.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_lptmr.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_pdb.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_pit.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_pmc.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_pwm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_rcm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_sim.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_smc.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_sysmpu.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_trng.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_uart.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_uart_edma.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_wdog.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_xbara.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_xbarb.c</name>
+            <name>$PROJ_DIR$\Lib\src\uart.c</name>
         </file>
     </group>
 </project>
