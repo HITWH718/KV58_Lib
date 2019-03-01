@@ -35,5 +35,4 @@ void I2C_WriteAddr16(I2Cn i2cn, uint8_t SlaveID, uint8_t Addr, uint16_t Data);
 void I2C_StartTransmission (I2Cn, uint8_t SlaveID, MSmode);        //启动传输
 uint8_t I2C_ReadAddr(I2Cn, uint8_t SlaveID, uint8_t Addr);                 //读取地址里的内容
 
-
 #endif

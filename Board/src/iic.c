@@ -328,3 +328,4 @@ void I2C_WriteAddr16(I2Cn i2cn, uint8_t SlaveID, uint8_t Addr, uint16_t Data)
   
   Pause();                                        //延时太短的话，可能写出错
 }
+

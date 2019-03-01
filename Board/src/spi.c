@@ -392,3 +392,4 @@ void spi_mosi_cmd(SPIn_e spin, SPI_PCSn_e pcs, uint8_t *mocmd , uint8_t *micmd ,
     }
     (SPIN[spin]->SR) |= SPI_SR_RFDF_MASK;
 }
+

@@ -71,6 +71,4 @@ uint32_t spi_set_baud(SPIn_e, uint32_t baud);
 extern void spi_mosi(SPIn_e, SPI_PCSn_e pcs, uint8_t *modata, uint8_t *midata, uint32_t len);    //SPI发送接收函数,发送databuff数据，并把接收到的数据存放在databuff里(注意，会覆盖原来的databuff)
 extern void spi_mosi_cmd(SPIn_e, SPI_PCSn_e pcs, uint8_t *mocmd , uint8_t *micmd , uint8_t *modata, uint8_t *midata, uint32_t cmdlen , uint32_t len); //SPI发送接收函数,与spi_mosi相比，多了先发送cmd 缓冲区的步骤，即分开两部分发送
 
-
-
 #endif
