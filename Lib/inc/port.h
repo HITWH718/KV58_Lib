@@ -4,7 +4,7 @@
 #include "fsl_common.h"
 
 
-//PORT¼Ä´æÆ÷
+//PORTå¯„å­˜å™¨
 #define PORT_PCR_REG(base,index)                 ((base)->PCR[index])
 #define PORT_GPCLR_REG(base)                     ((base)->GPCLR)
 #define PORT_GPCHR_REG(base)                     ((base)->GPCHR)
@@ -12,7 +12,7 @@
 #define PORT_DFER_REG(base)                      ((base)->DFER)
 #define PORT_DFCR_REG(base)                      ((base)->DFCR)
 #define PORT_DFWR_REG(base)                      ((base)->DFWR)
-//SIM¼Ä´æÆ÷
+//SIMå¯„å­˜å™¨
 #define SIM_SCGC1                                ((SIM)->SCGC1)
 #define SIM_SCGC2                                ((SIM)->SCGC2)
 #define SIM_SCGC3                                ((SIM)->SCGC3)
@@ -22,44 +22,44 @@
 #define SIM_SCGC7                                ((SIM)->SCGC7)
 
 typedef enum _port_mux
-{ 
-  
-  Disabled = 0U,         /*!< Corresponding pin is disabled, but is used as an analog pin. */
-  AsGpio = 1U,           /*!< Corresponding pin is configured as GPIO. */
-  Alt2 = 2U,             /*!< Chip-specific */
-  Alt3 = 3U,             /*!< Chip-specific */
-  Alt4 = 4U,             /*!< Chip-specific */
-  Alt5 = 5U,             /*!< Chip-specific */
-  Alt6 = 6U,             /*!< Chip-specific */
-  Alt7 = 7U,             /*!< Chip-specific */
-  Alt8 = 8U,             /*!< Chip-specific */
-  Alt9 = 9U,             /*!< Chip-specific */
-  Alt10 = 10U,           /*!< Chip-specific */
-  Alt11 = 11U,           /*!< Chip-specific */
-  Alt12 = 12U,           /*!< Chip-specific */
-  Alt13 = 13U,           /*!< Chip-specific */
-  Alt14 = 14U,           /*!< Chip-specific */
-  Alt15 = 15U,           /*!< Chip-specific */
-  
-  IRQ_ZERO     = PORT_PCR_IRQC(0x08),     //µÍµçÆ½´¥·¢
-  IRQ_RISING   = PORT_PCR_IRQC(0x09),    //ÉÏÉıÑØ´¥·¢
-  IRQ_FALLING  = PORT_PCR_IRQC(0x0A),   //ÏÂ½µÑØ´¥·¢
-  IRQ_EITHER   = PORT_PCR_IRQC(0x0B),  //Ìø±äÑØ´¥·¢
-  IRQ_ONE      = PORT_PCR_IRQC(0x0C),  //¸ßµçÆ½´¥·¢
-  
-  //DMAÇëÇó
-  DMA_RISING   = PORT_PCR_IRQC(0x01),   //ÉÏÉıÑØ´¥·¢
-  DMA_FALLING  = PORT_PCR_IRQC(0x02),   //ÏÂ½µÑØ´¥·¢
-  DMA_EITHER   = PORT_PCR_IRQC(0x03),   //Ìø±äÑØ´¥·¢
-  
-  HDS          = PORT_PCR_DSE(0x01),    //Êä³ö¸ßÇı¶¯ÄÜÁ¦
-  OD           = PORT_PCR_ODE(0x01),    //Â©¼«Êä³ö
-  PF           = PORT_PCR_PFE(0x01),    //´øÎŞÔ´ÂË²¨Æ÷
-  SSR          = PORT_PCR_SRE(0x01),     //Êä³öÂı±ä»¯ÂÊ 
-  
-  //ÏÂÀ­ÉÏÀ­Ñ¡Ôñ
-  PULLDOWN     = 0x02 << PORT_PCR_PS_SHIFT,     //ÏÂÀ­
-  PULLUP       = 0x03 << PORT_PCR_PS_SHIFT,     //ÉÏÀ­
+{
+
+  Disabled = PORT_PCR_MUX(0x00),         /*!< Corresponding pin is disabled, but is used as an analog pin. */
+  AsGpio = PORT_PCR_MUX(0x01),           /*!< Corresponding pin is configured as GPIO. */
+  Alt2 = PORT_PCR_MUX(0x02),             /*!< Chip-specific */
+  Alt3 = PORT_PCR_MUX(0x03),             /*!< Chip-specific */
+  Alt4 = PORT_PCR_MUX(0x04),             /*!< Chip-specific */
+  Alt5 = PORT_PCR_MUX(0x05),             /*!< Chip-specific */
+  Alt6 = PORT_PCR_MUX(0x06),             /*!< Chip-specific */
+  Alt7 = PORT_PCR_MUX(0x07),             /*!< Chip-specific */
+  Alt8 = PORT_PCR_MUX(0x08),             /*!< Chip-specific */
+  Alt9 = PORT_PCR_MUX(0x09),             /*!< Chip-specific */
+  Alt10 = PORT_PCR_MUX(0x0A),           /*!< Chip-specific */
+  Alt11 = PORT_PCR_MUX(0x0B),           /*!< Chip-specific */
+  Alt12 = PORT_PCR_MUX(0x0C),           /*!< Chip-specific */
+  Alt13 = PORT_PCR_MUX(0x0D),           /*!< Chip-specific */
+  Alt14 = PORT_PCR_MUX(0x0E),           /*!< Chip-specific */
+  Alt15 = PORT_PCR_MUX(0x0F),           /*!< Chip-specific */
+
+  IRQ_ZERO     = PORT_PCR_IRQC(0x08),     //ä½ç”µå¹³è§¦å‘
+  IRQ_RISING   = PORT_PCR_IRQC(0x09),    //ä¸Šå‡æ²¿è§¦å‘
+  IRQ_FALLING  = PORT_PCR_IRQC(0x0A),   //ä¸‹é™æ²¿è§¦å‘
+  IRQ_EITHER   = PORT_PCR_IRQC(0x0B),  //è·³å˜æ²¿è§¦å‘
+  IRQ_ONE      = PORT_PCR_IRQC(0x0C),  //é«˜ç”µå¹³è§¦å‘
+
+  //DMAè¯·æ±‚
+  DMA_RISING   = PORT_PCR_IRQC(0x01),   //ä¸Šå‡æ²¿è§¦å‘
+  DMA_FALLING  = PORT_PCR_IRQC(0x02),   //ä¸‹é™æ²¿è§¦å‘
+  DMA_EITHER   = PORT_PCR_IRQC(0x03),   //è·³å˜æ²¿è§¦å‘
+
+  HDS          = PORT_PCR_DSE(0x01),    //è¾“å‡ºé«˜é©±åŠ¨èƒ½åŠ›
+  OD           = PORT_PCR_ODE(0x01),    //æ¼æè¾“å‡º
+  PF           = PORT_PCR_PFE(0x01),    //å¸¦æ— æºæ»¤æ³¢å™¨
+  SSR          = PORT_PCR_SRE(0x01),     //è¾“å‡ºæ…¢å˜åŒ–ç‡
+
+  //ä¸‹æ‹‰ä¸Šæ‹‰é€‰æ‹©
+  PULLDOWN     = 0x02 << PORT_PCR_PS_SHIFT,     //ä¸‹æ‹‰
+  PULLUP       = 0x03 << PORT_PCR_PS_SHIFT,     //ä¸Šæ‹‰
 } port_mux_t;
 
 typedef enum _PTXn
@@ -99,9 +99,9 @@ typedef enum _PTn
 //PTx = PTxn / 32 ; PTn = PTxn & 31
 #define PTX(PTxn)           ((PTxn)>>5)
 #define PTn(PTxn)           ((PTxn)&0x1f)
-#define PORTX_BASE(PTxn)     PORTx[PTX(PTxn)]       //PORTÄ£¿éµÄµØÖ·
+#define PORTX_BASE(PTxn)     PORTx[PTX(PTxn)]       //PORTæ¨¡å—çš„åœ°å€
 
-extern void port_init(PTXn_e ptxn, uint32_t mux);
-extern void port_cfg();
+extern void port_init(PTXn_e ptxn, uint32_t cfg);
+extern void port_init_NoALT(PTXn_e ptxn, uint32_t cfg);
 
 #endif
