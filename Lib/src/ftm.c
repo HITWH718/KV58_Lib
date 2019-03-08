@@ -30,7 +30,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM0_CH0_PIN,Alt5);
             }
             break;
-            
+
         case ftm_ch1:
             if(PTA4==FTM0_CH1_PIN || PTE25==FTM0_CH1_PIN)
             {
@@ -45,7 +45,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM0_CH1_PIN,Alt5);
             }
             break;
-            
+
         case ftm_ch2:
             if(PTA5==FTM0_CH2_PIN || PTE29==FTM0_CH2_PIN)
             {
@@ -60,7 +60,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM0_CH2_PIN,Alt5);
             }
             break;
-            
+
         case ftm_ch3:
             if(PTA6==FTM0_CH3_PIN || PTE30==FTM0_CH3_PIN)
             {
@@ -75,7 +75,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM0_CH3_PIN,Alt5);
             }
             break;
-            
+
         case ftm_ch4:
             if(PTA7==FTM0_CH4_PIN || PTE26==FTM0_CH4_PIN)
             {
@@ -86,7 +86,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM0_CH4_PIN,Alt4);
             }
             break;
-            
+
         case ftm_ch5:
             if(PTA0==FTM0_CH5_PIN)
             {
@@ -108,7 +108,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM0_CH6_PIN,Alt4);
             }
             break;
-            
+
         case ftm_ch7:
             if(PTA2==FTM0_CH7_PIN)
             {
@@ -121,7 +121,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
             break;
         }
         break;
-        
+
     case ftm1:
         /* Enable uart clock */
         SIM->SCGC6 |= SIM_SCGC6_FTM1_MASK;
@@ -141,7 +141,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM1_CH0_PIN,Alt6);
             }
             break;
-            
+
         case ftm_ch1:
             if(PTA9==FTM1_CH1_PIN || PTA13==FTM1_CH1_PIN || PTB1==FTM1_CH1_PIN || PTE21==FTM1_CH1_PIN)
             {
@@ -158,7 +158,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
             break;
         }
         break;
-        
+
     case ftm2:
         /* Enable uart clock */
         SIM->SCGC6 |= SIM_SCGC6_FTM2_MASK;
@@ -167,22 +167,111 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
         case ftm_ch0:
             port_init(FTM2_CH0_PIN,Alt3);
             break;
-            
+
         case ftm_ch1:
             port_init(FTM2_CH1_PIN,Alt3);
             break;
-        
         default:
             break;
         }
         break;
-    
-    default:
+    case ftm3:
+        SIM->SCGC6 |= SIM_SCGC6_FTM3_MASK;
+
+        switch(ch)
+        {
+        case ftm_ch0:
+            if(PTD0==FTM0_CH0_PIN)
+            {
+                port_init(FTM0_CH0_PIN, Alt4);
+            }
+            else if(PTE5==FTM0_CH0_PIN)
+            {
+                port_init(FTM0_CH0_PIN,Alt6);
+            }
+            break;
+
+        case ftm_ch1:
+            if(PTD1==FTM0_CH1_PIN)
+            {
+                port_init(FTM0_CH1_PIN,Alt4);
+            }
+            else if(PTE6==FTM0_CH1_PIN)
+            {
+                port_init(FTM0_CH1_PIN,Alt6);
+            }
+            break;
+
+        case ftm_ch2:
+            if(PTB18==FTM3_CH2_PIN || PTD2==FTM3_CH2_PIN)
+            {
+                port_init(FTM3_CH2_PIN,Alt4);
+            }
+            else if(PTA18==FTM3_CH2_PIN || PTE7==FTM3_CH2_PIN)
+            {
+                port_init(FTM3_CH2_PIN,Alt6);
+            }
+            break;
+
+        case ftm_ch3:
+            if(PTB19==FTM3_CH3_PIN || PTD3==FTM3_CH3_PIN)
+            {
+                port_init(FTM3_CH3_PIN,Alt4);
+            }
+            else if(PTE8==FTM3_CH3_PIN)
+            {
+                port_init(FTM3_CH3_PIN,Alt6);
+            }
+            break;
+
+        case ftm_ch4:
+            if(PTC8==FTM3_CH4_PIN)
+            {
+                port_init(FTM3_CH4_PIN,Alt3);
+            }
+            else if(PTE9==FTM3_CH4_PIN)
+            {
+                port_init(FTM3_CH4_PIN,Alt6);
+            }
+            break;
+
+        case ftm_ch5:
+            if(PTC9==FTM3_CH5_PIN)
+            {
+                port_init(FTM3_CH5_PIN,Alt3);
+            }
+            else if(PTE10==FTM3_CH5_PIN)
+            {
+                port_init(FTM3_CH5_PIN,Alt6);
+            }
+            break;
+
+        case ftm_ch6:
+            if(PTC10==FTM3_CH6_PIN)
+            {
+                port_init(FTM3_CH6_PIN,Alt3);
+            }
+            else if(PTE11==FTM3_CH6_PIN)
+            {
+                port_init(FTM3_CH6_PIN,Alt6);
+            }
+            break;
+        case ftm_ch7:
+            if(PTC11==FTM3_CH7_PIN)
+            {
+                port_init(FTM3_CH7_PIN,Alt3);
+            }
+            else if(PTE12==FTM3_CH7_PIN)
+            {
+                port_init(FTM3_CH7_PIN,Alt6);
+            }
+            break;
+        }
         break;
     }
-    
+
     /* Setup the channel output behaviour when a match occurs with the compare value */
-    FTMn[ftmn]->CONTROLS[ch].CnSC &= FTM_CnSC_ELSA_MASK;
+    FTMn[ftmn]->CONTROLS[ch].CnSC &= ~FTM_CnSC_ELSA_MASK;
     FTMn[ftmn]->CONTROLS[ch].CnSC = FTM_CnSC_MSB_MASK | FTM_CnSC_ELSB_MASK;
     /* Set the clock prescale factor */
     FTMn[ftmn]->SC |= FTM_SC_PS(7);
@@ -229,7 +318,9 @@ void ftm_pwm_duty(FTMn_e ftmn, FTM_CHn_e ch, uint16_t duty)
 }
 
 void ftm_quad_init(FTMn_e ftmn)
-{
+{   
+    assert(ftmn == ftm1 || ftmn == ftm2);
+
     switch(ftmn)
     {
     case ftm1:
@@ -246,7 +337,7 @@ void ftm_quad_init(FTMn_e ftmn)
         {
             port_init(FTM1_QDPHA,Alt7);
         }
-        
+
         if(PTE21==FTM1_QDPHB)
         {
             port_init(FTM1_QDPHB,Alt5);
@@ -284,9 +375,9 @@ void ftm_quad_init(FTMn_e ftmn)
         break;
     }
     /* Write Protection Disable */
-    FTMn[ftmn]->MODE &= FTM_MODE_WPDIS_MASK;
+    FTMn[ftmn]->MODE |= FTM_MODE_WPDIS_MASK;
     /* Clear To Zero*/
-    FTMn[ftmn]->QDCTRL &= FTM_QDCTRL_QUADMODE_MASK;
+    FTMn[ftmn]->QDCTRL &= ~FTM_QDCTRL_QUADMODE_MASK;
     /* Init */
     FTMn[ftmn]->CNTIN = 0;
     FTMn[ftmn]->MOD = FTM_MOD_MOD_MASK;
@@ -301,11 +392,12 @@ void ftm_quad_init(FTMn_e ftmn)
 
 uint16_t ftm_quad_get(FTMn_e ftmn)
 {
+    assert(ftmn == ftm1 || ftmn == ftm2);
     return FTMn[ftmn]->CNT;
 }
 
 void ftm_quad_clean(FTMn_e ftmn)
 {
+    assert(ftmn == ftm1 || ftmn == ftm2);
     FTMn[ftmn]->CNT = 0;
 }
-
