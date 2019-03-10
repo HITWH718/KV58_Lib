@@ -2,9 +2,9 @@
 #include "port.h"
 
 /*!
- *  @brief      Ä£ÄâSPIÑÓÊ±
+ *  @brief      æ¨¡æ‹ŸSPIå»¶æ—¶
  *  @return     void
- *  Sample usage:       SPI_delay()    Èç¹ûSPIÍ¨Ñ¶Ê§°Ü¿ÉÒÔ³¢ÊÔÔö¼ÓnµÄÖµ
+ *  Sample usage:       SPI_delay()    å¦‚æœSPIé€šè®¯å¤±è´¥å¯ä»¥å°è¯•å¢åŠ nçš„å€¼
  */
 static void SPI_delay()
 {
@@ -17,7 +17,7 @@ static void SPI_delay()
 }
 
 /*!
- *  @brief      SPIÊ¹ÄÜ
+ *  @brief      SPIä½¿èƒ½
  *  @return     void
  *  Sample usage:       SPI_enable(SPI_ENABLE)
  */
@@ -27,8 +27,8 @@ inline void SPI_enable(uint8_t enable)
 }
 
 /*!
- *  @brief      SPI¶ÁÈ¡
- *  @return     uint8_t SPI¶ÁÈ¡µÄÊı¾İ
+ *  @brief      SPIè¯»å–
+ *  @return     uint8_t SPIè¯»å–çš„æ•°æ®
  *  Sample usage:       uint8_t data = SPI_read()
  */
 uint8_t SPI_read()
@@ -42,8 +42,8 @@ uint8_t SPI_read()
 
         SCK_SET(0);
         SPI_delay();
-        SCK_SET(1);      // CPHA=1£¬ÔÚÊ±ÖÓµÄµÚÒ»¸öÌø±äÑØ²ÉÑù
-        if(MISO())   //Âß¼­1
+        SCK_SET(1);      // CPHA=1ï¼Œåœ¨æ—¶é’Ÿçš„ç¬¬ä¸€ä¸ªè·³å˜æ²¿é‡‡æ ·
+        if(MISO())   //é€»è¾‘1
         {
             c += 1;
         }
@@ -53,7 +53,7 @@ uint8_t SPI_read()
 }
 
 /*!
- *  @brief      SPIĞ´Èë
+ *  @brief      SPIå†™å…¥
  *  @return     void
  *  Sample usage:       SPI_write(c)
  */
@@ -66,21 +66,21 @@ void SPI_write(uint8_t c)
         SCK_SET(0);
         if(c & 0x80)
         {
-            MOSI_SET(1);    //Êä³öÂß¼­1
+            MOSI_SET(1);    //è¾“å‡ºé€»è¾‘1
         }
         else
         {
-            MOSI_SET(0);    //Êä³öÂß¼­0
+            MOSI_SET(0);    //è¾“å‡ºé€»è¾‘0
         }
         SPI_delay();
-        SCK_SET(1);      // CPHA=1£¬ÔÚÊ±ÖÓµÄµÚÒ»¸öÌø±äÑØ²ÉÑù
+        SCK_SET(1);      // CPHA=1ï¼Œåœ¨æ—¶é’Ÿçš„ç¬¬ä¸€ä¸ªè·³å˜æ²¿é‡‡æ ·
         SPI_delay();
         c <<= 1;
     }
 }
 
 /*!
- *  @brief      SPIĞ´Èë16Î»
+ *  @brief      SPIå†™å…¥16ä½
  *  @return     void
  *  Sample usage:       SPI_write_16bit(c)
  */
@@ -93,21 +93,21 @@ void SPI_write_16bit(uint16_t c)
         SCK_SET(0);
         if(c & 0x8000)
         {
-            MOSI_SET(1);    //Êä³öÂß¼­1
+            MOSI_SET(1);    //è¾“å‡ºé€»è¾‘1
         }
         else
         {
-            MOSI_SET(0);    //Êä³öÂß¼­0
+            MOSI_SET(0);    //è¾“å‡ºé€»è¾‘0
         }
         SPI_delay();
-        SCK_SET(1);      // CPHA=1£¬ÔÚÊ±ÖÓµÄµÚÒ»¸öÌø±äÑØ²ÉÑù
+        SCK_SET(1);      // CPHA=1ï¼Œåœ¨æ—¶é’Ÿçš„ç¬¬ä¸€ä¸ªè·³å˜æ²¿é‡‡æ ·
         SPI_delay();
         c <<= 1;
     }
 }
 
 /*!
- *  @brief      SPI³õÊ¼»¯
+ *  @brief      SPIåˆå§‹åŒ–
  *  @return     void
  *  Sample usage:       SPI_init()
  */

@@ -10,6 +10,9 @@ void IIC_init()
 {
     gpio_init(IIC_SCL, GPO, 0);
     gpio_init(IIC_SDA, GPO, 0);
+
+    port_init_NoALT(IIC_SCL, OD | PULLUP);
+    port_init_NoALT(IIC_SDA, OD | PULLUP);
 }
 
 /*!
@@ -19,7 +22,7 @@ void IIC_init()
  */
 static void IIC_delay()
 {
-    uint8_t n = 2;
+    uint8_t n = 16;
 
     while(n--)
     {
@@ -35,12 +38,13 @@ static void IIC_delay()
 static void IIC_start()
 {
     DIR_OUT();
+
     SDA_SET(1);
-    IIC_delay();
     SCL_SET(1);
     IIC_delay();
     SDA_SET(0);
     IIC_delay();
+    SCL_SET(0);
 }
 
 /*!
@@ -51,7 +55,9 @@ static void IIC_start()
 static void IIC_stop()
 {
     DIR_OUT();
+
     SDA_SET(0);
+    SCL_SET(0);
     IIC_delay();
     SCL_SET(1);
     IIC_delay();
@@ -107,7 +113,37 @@ static uint8_t IIC_wait_ack()
     }
     DIR_OUT();
     SCL_SET(0);
+    IIC_delay();
     return 1;
+}
+
+/*!
+ *  @brief      IIC写入
+ *  @param      c   写入的数据
+ *  @return     void
+ *  Sample usage:       IIC_write(8)
+ */
+void IIC_write(uint8_t c)
+{
+    uint8_t i=8;
+
+    while(i--)
+    {
+        if(c & 0x80)    //取数据高位
+        {
+            SDA_SET(1); //发送逻辑1
+        }
+        else
+        {
+            SDA_SET(0); //发送逻辑0
+        }
+        c <<= 1;
+        IIC_delay();
+        SCL_SET(1); //SCL时钟拉高， 维持一段时间
+        IIC_delay();
+        SCL_SET(0); //SCL时钟拉低
+    }
+    IIC_wait_ack(); //等待应答
 }
 
 /*!
@@ -144,35 +180,6 @@ uint8_t IIC_read()
 	IIC_ack(NO_ACK);
 
     return c;
-}
-
-/*!
- *  @brief      IIC写入
- *  @param      c   写入的数据
- *  @return     void
- *  Sample usage:       IIC_write(8)
- */
-void IIC_write(uint8_t c)
-{
-    uint8_t i=8;
-
-    while(i--)
-    {
-        if(c & 0x80)    //取数据高位
-        {
-            SDA_SET(1); //发送逻辑1
-        }
-        else
-        {
-            SDA_SET(0); //发送逻辑0
-        }
-        c <<= 1;
-        IIC_delay();
-        SCL_SET(1); //SCL时钟拉高， 维持一段时间
-        IIC_delay();
-        SCL_SET(0); //SCL时钟拉低
-    }
-    IIC_wait_ack(); //等待应答
 }
 
 /*!

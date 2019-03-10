@@ -14,7 +14,7 @@ void uart_init(UARTn_e uartn, uint32_t baud)
     case uart0:
         /* Enable uart clock */
         SIM->SCGC4 |= (SIM_SCGC4_UART0_MASK);
-        
+
         if(PTA1==UART0_RX_PIN)
         {
             port_init(UART0_RX_PIN,Alt2);
@@ -35,7 +35,7 @@ void uart_init(UARTn_e uartn, uint32_t baud)
         {
             port_init(UART0_RX_PIN,Alt5);
         }
-        
+
         if(PTA2==UART0_TX_PIN)
         {
             port_init(UART0_TX_PIN,Alt2);
@@ -57,82 +57,91 @@ void uart_init(UARTn_e uartn, uint32_t baud)
             port_init(UART0_TX_PIN,Alt7);
         }
         break;
-        
+
     case uart1:
         /* Enable uart clock */
         SIM->SCGC4 |= (SIM_SCGC4_UART1_MASK);
-        
+
         port_init(UART1_RX_PIN,Alt3);
         port_init(UART1_TX_PIN,Alt3);
         break;
-        
+
     case uart2:
         /* Enable uart clock */
         SIM->SCGC4 |= (SIM_SCGC4_UART2_MASK);
-        
+
         port_init(UART2_RX_PIN,Alt3);
         port_init(UART2_TX_PIN,Alt3);
         break;
-        
+
     case uart3:
         /* Enable uart clock */
         SIM->SCGC4 |= (SIM_SCGC4_UART3_MASK);
-        
+
         port_init(UART3_RX_PIN,Alt3);
         port_init(UART3_TX_PIN,Alt3);
         break;
-        
+
     case uart4:
         /* Enable uart clock */
         SIM->SCGC1 |= (SIM_SCGC1_UART4_MASK);
-        
-        port_init(UART4_RX_PIN,Alt8);
-        port_init(UART4_TX_PIN,Alt9);
+
+        if(PTC14 == UART4_RX_PIN)
+        {
+            port_init(UART4_RX_PIN,Alt9);
+            port_init(UART4_TX_PIN,Alt9);
+        }
+        else if(PTE25 == UART4_RX_PIN)
+        {
+            port_init(UART4_RX_PIN,Alt8);
+            port_init(UART4_TX_PIN,Alt8);
+        }
+
         break;
-        
+
     case uart5:
         /* Enable uart clock */
         SIM->SCGC1 |= (SIM_SCGC1_UART5_MASK);
-        
+
         port_init(UART5_RX_PIN,Alt3);
         port_init(UART5_TX_PIN,Alt3);
         break;
-        
+
     default:
         break;
     }
 
     /* Disable UART TX RX before setting. */
     UARTn[uartn]->C2 &= ~(UART_C2_TE_MASK | UART_C2_RE_MASK);
-    
+
     /* Calculate the baud rate modulo divisor, sbr*/
     sbr = (uint16_t)(fastperiphral_clk_khz * 1000 / (baud * 16));
     if(sbr > 0x1FFF)sbr = 0x1FFF;   //sbr[12:0]
-    
+
     /* Calcute brfa */
     brfa = 2 * ((2 * fastperiphral_clk_khz * 1000 / baud) - (sbr * 16));
     if(brfa > 0x1F)brfa = 0x1F; //brfa[4:0]
-    
+
     /* Write the sbr value to the BDH and BDL registers*/
     UARTn[uartn]->BDH = (UARTn[uartn]->BDH & ~UART_BDH_SBR_MASK) | (uint8_t)(sbr >> 8);
     UARTn[uartn]->BDL = (uint8_t)sbr;
-    
+
     /* Write the brfa value to the register*/
     UARTn[uartn]->C4 = (UARTn[uartn]->C4 & ~UART_C4_BRFA_MASK) | brfa;
-    
+
     /* Set bit count/parity mode/idle/stop bits type. */
     UARTn[uartn]->C1 &= ~(UART_C1_M_MASK | UART_C1_PE_MASK | UART_C1_PT_MASK);
     UARTn[uartn]->C1 |= UART_C1_M(0);   //8 data bits,or UART_C1_M(1),9 data bits
     UARTn[uartn]->C1 |= UART_C1_PE(0) | UART_C1_PT(0);   //parity function disabled
     UARTn[uartn]->BDH &= ~(UART_BDH_SBNS_MASK);
     UARTn[uartn]->BDH |= UART_BDH_SBNS(0);  //one stop bit,or two when UART_BDH_SBNS(1)
-    
+
     /* Enable tx/rx FIFO */
     UARTn[uartn]->PFIFO |= (UART_PFIFO_TXFE_MASK | UART_PFIFO_RXFE_MASK);
-    
+
     /* Flush FIFO */
     UARTn[uartn]->CFIFO |= (UART_CFIFO_TXFLUSH_MASK | UART_CFIFO_RXFLUSH_MASK);
-    
+
     /* Enable TX/RX  */
     UARTn[uartn]->C2 |= (UART_C2_TE_MASK | UART_C2_RE_MASK);
 }
@@ -221,7 +230,7 @@ void UART0_RX_TX_IRQHandler(void)
     }
     if(UARTn[0]->S1 & UART_S1_TDRE_MASK)
     {
-    
+
     }
 }
 

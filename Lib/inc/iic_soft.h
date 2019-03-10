@@ -3,26 +3,25 @@
 
 #include "gpio.h"
 
-//IIC Òı½Åºê¶¨Òå
-#define IIC_SCL        PTC16
-#define IIC_SDA        PTC17
+//IIC å¼•è„šå®å®šä¹‰
+#define IIC_SCL        PTE2
+#define IIC_SDA        PTE3
 
-//IIC Òı½Å¿ØÖÆºê¶¨Òå
+//IIC å¼•è„šæ§åˆ¶å®å®šä¹‰
 #define SDA()          gpio_get(IIC_SDA)
 
-#define SCL_SET(x)     gpio_set(IIC_SCL,x)  //IO¿ÚÊä³öµÍµçÆ½»òµÍµçÆ½
-#define SDA_SET(x)     gpio_set(IIC_SDA,x)  //IO¿ÚÊä³öµÍµçÆ½»òµÍµçÆ½
+#define SCL_SET(x)     gpio_set(IIC_SCL,x)  //IOå£è¾“å‡ºä½ç”µå¹³æˆ–ä½ç”µå¹³
+#define SDA_SET(x)     gpio_set(IIC_SDA,x)  //IOå£è¾“å‡ºä½ç”µå¹³æˆ–ä½ç”µå¹³
 
-#define DIR_OUT()      gpio_ddr(IIC_SDA, GPO)    //Êä³ö·½Ïò
-#define DIR_IN()       gpio_ddr(IIC_SDA, GPI)    //ÊäÈë·½Ïò
+#define DIR_OUT()      gpio_ddr(IIC_SDA, GPO)    //è¾“å‡ºæ–¹å‘
+#define DIR_IN()       gpio_ddr(IIC_SDA, GPI)    //è¾“å…¥æ–¹å‘
 
-//IIC Ó¦´ğ
-#define ACK          1  //Ö÷Ó¦´ğ
-#define NO_ACK       0  //´ÓÓ¦´ğ
+//IIC åº”ç­”
+#define ACK          1  //ä¸»åº”ç­”
+#define NO_ACK       0  //ä»åº”ç­”
 
+extern void IIC_init();
 extern void IIC_write_reg(uint8_t dev_add, uint8_t reg, uint8_t data);
 extern uint8_t IIC_read_reg(uint8_t dev_add, uint8_t reg);
 
 #endif
-
-
