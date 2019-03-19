@@ -32,6 +32,6 @@ typedef enum _FTM_CHn
 extern void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq);
 extern void ftm_pwm_duty(FTMn_e ftmn, FTM_CHn_e ch, uint16_t duty);
 extern void ftm_quad_init(FTMn_e ftmn);
-extern uint16_t ftm_quad_get(FTMn_e ftmn);
+extern int16_t ftm_quad_get(FTMn_e ftmn);
 extern void ftm_quad_clean(FTMn_e ftmn);
 #endif
