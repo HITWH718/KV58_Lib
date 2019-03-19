@@ -181,24 +181,24 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
         switch(ch)
         {
         case ftm_ch0:
-            if(PTD0==FTM0_CH0_PIN)
+            if(PTD0==FTM3_CH0_PIN)
             {
-                port_init(FTM0_CH0_PIN, Alt4);
+                port_init(FTM3_CH0_PIN, Alt4);
             }
-            else if(PTE5==FTM0_CH0_PIN)
+            else if(PTE5==FTM3_CH0_PIN)
             {
-                port_init(FTM0_CH0_PIN,Alt6);
+                port_init(FTM3_CH0_PIN,Alt6);
             }
             break;
 
         case ftm_ch1:
-            if(PTD1==FTM0_CH1_PIN)
+            if(PTD1==FTM3_CH1_PIN)
             {
-                port_init(FTM0_CH1_PIN,Alt4);
+                port_init(FTM3_CH1_PIN,Alt4);
             }
-            else if(PTE6==FTM0_CH1_PIN)
+            else if(PTE6==FTM3_CH1_PIN)
             {
-                port_init(FTM0_CH1_PIN,Alt6);
+                port_init(FTM3_CH1_PIN,Alt6);
             }
             break;
 
@@ -245,7 +245,6 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
                 port_init(FTM3_CH5_PIN,Alt6);
             }
             break;
-
         case ftm_ch6:
             if(PTC10==FTM3_CH6_PIN)
             {
@@ -318,7 +317,7 @@ void ftm_pwm_duty(FTMn_e ftmn, FTM_CHn_e ch, uint16_t duty)
 }
 
 void ftm_quad_init(FTMn_e ftmn)
-{   
+{
     assert(ftmn == ftm1 || ftmn == ftm2);
 
     switch(ftmn)
@@ -357,18 +356,18 @@ void ftm_quad_init(FTMn_e ftmn)
         {
             port_init(FTM2_QDPHA,Alt5);
         }
-        else if(PTA10==FTM2_QDPHA || PTA18==FTM2_QDPHA)
+        else if(PTA10==FTM2_QDPHA || PTB18==FTM2_QDPHA)
         {
             port_init(FTM2_QDPHA,Alt6);
         }
 
-        if(PTE23==FTM2_QDPHA || PTA2==FTM2_QDPHA)
+        if(PTE23==FTM2_QDPHB || PTA2==FTM2_QDPHB)
         {
-            port_init(FTM2_QDPHA,Alt5);
+            port_init(FTM2_QDPHB,Alt5);
         }
-        else if(PTA11==FTM2_QDPHA || PTB19==FTM2_QDPHA)
+        else if(PTA11==FTM2_QDPHB || PTB19==FTM2_QDPHB)
         {
-            port_init(FTM2_QDPHA,Alt6);
+            port_init(FTM2_QDPHB,Alt6);
         }
         break;
     default:
@@ -376,21 +375,19 @@ void ftm_quad_init(FTMn_e ftmn)
     }
     /* Write Protection Disable */
     FTMn[ftmn]->MODE |= FTM_MODE_WPDIS_MASK;
-    /* Clear To Zero*/
-    FTMn[ftmn]->QDCTRL &= ~FTM_QDCTRL_QUADMODE_MASK;
+    /*  Select QD Mode*/
+    FTMn[ftmn]->QDCTRL |= FTM_QDCTRL_QUADMODE_MASK;
     /* Init */
     FTMn[ftmn]->CNTIN = 0;
     FTMn[ftmn]->MOD = FTM_MOD_MOD_MASK;
-    /* Select QD Mode */
-    FTMn[ftmn]->QDCTRL |= FTM_QDCTRL_QUADMODE_MASK;
     /* Enable */
     FTMn[ftmn]->QDCTRL |= FTM_QDCTRL_QUADEN_MASK;
+    FTMn[ftmn]->MODE |= FTM_QDCTRL_QUADEN_MASK;
     /* Init The Counter*/
     FTMn[ftmn]->CNT = 0;
 }
 
-
-uint16_t ftm_quad_get(FTMn_e ftmn)
+int16_t ftm_quad_get(FTMn_e ftmn)
 {
     assert(ftmn == ftm1 || ftmn == ftm2);
     return FTMn[ftmn]->CNT;
