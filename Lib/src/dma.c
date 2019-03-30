@@ -3,34 +3,16 @@
 //#include "common.h"
 #include "port.h"
 
-//static void dma_gpio_input_init(void *SADDR,uint8 BYTEs)
-//{
-//  uint8 n, tmp;
-//  uint8 ptxn;
-//  //SADDR 实际上就是 GPIO的 输入寄存器 PDIR 的地址
-//  //GPIOA、GPIOB、GPIOC、GPIOD、GPIOE 的地址 分别是 0x400FF000u 、0x400FF040u 、0x400FF080u、 0x400FF0C0u、0x400FF100u
-//  //sizeof(GPIO_MemMap) = 0x18
-//  //每个GPIO地址 &0x1C0 后，得到 0x000 , 0x040 , 0x080 ,0x0C0 ,0x100
-//  //再 /0x40 后得到 0 、 1 、 2、 3、4 ，刚好就是 PTA、PTB、PTC 、PTD 、PTE
-//  //再 *32 就等于 PTA0、PTB0、PTC0 、PTD0 、PTE0
-//  uint8 ptx0 = ((((uint32)SADDR) & 0x1C0) / 0x40 ) * 32;
-//  //每个GPIO 对应的寄存器地址， &0x 3F 后得到的值都是相同的。
-//    //&GPIO_PDIR_REG(GPIOA) 即 GPIOA 的 输入寄存器 PDIR 的 地址
-//    // (SADDR & 0x3f - &GPIO_PDIR_REG(GPIOA) & 0x3f) 等效于 (SADDR - PTA_B0_IN) & 0x3f
-//    //假设需要采集的位 为 0~7、8~15、16~23、24~31 ，则 上面式子对应的值 为 0、1、2、3
-//    //刚好是  0~7、8~15、16~23、24~31 位的地址偏移，再 * 8 就变成 0、8、16、24
-//  n = (uint8)(((uint32)SADDR - ((uint32)(&GPIO_PDIR_REG(GPIOA)))) & 0x3f) * 8;       //最小的引脚号
-//  
-//    ptxn = ptx0 + n;
-//    tmp = ptxn + (BYTEs * 8 ) - 1;                                          //最大的引脚号
-//    while(ptxn <= tmp)
-//    {
-//        port_init((PTXn_e )ptxn , ALT1 | PULLDOWN );    //输入源默认配置为下拉，默认读取到的是0
-//        //这里加入 GPIO 初始化为输入
-//        gpio_init((PTXn_e )ptxn, GPI, 0);               //设置为输入
-//        ptxn ++;
-//    }
-//}
+
+
+
+
+
+
+//dma内没有初始化触发引脚，需要单独初始化，源地址使用GPIO_BYT0_PDIR(gpio)  或GPIO_BYT1_PDIR(gpio)  等
+
+
+
 /*!
  *  @brief      DMA初始化，由IO口请求传输输入端口的数据到内存
  *  @param      DMA_CHn         通道号（DMA_CH0 ~ DMA_CH15）

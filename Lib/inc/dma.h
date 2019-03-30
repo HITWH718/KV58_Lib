@@ -105,6 +105,16 @@ typedef enum
     DADDR_RECOVER = 0,        //恢复目的地址
     DADDR_KEEPON  = 1,        //目的地址保持不变
 } DMA_cfg;
+
+
+typedef union
+{
+
+    uint32_t reg;
+    uint8_t  place[4];
+
+}PLACE_type;    //用于读取引脚寄存器的8位
+
 typedef enum
 {
     DMA_CH0,
@@ -239,7 +249,7 @@ typedef enum
 
 
 
-
+//引脚PDIR寄存器的8位数据
 #define GPIO_BYT0_PDIR(gpio)  (((PLACE_type *)&GPIO_PDIR_REG(gpio))->place[0])
 #define GPIO_BYT1_PDIR(gpio)  (((PLACE_type *)&GPIO_PDIR_REG(gpio))->place[1])
 #define GPIO_BYT2_PDIR(gpio)  (((PLACE_type *)&GPIO_PDIR_REG(gpio))->place[2])
