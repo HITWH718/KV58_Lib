@@ -2,6 +2,7 @@
 #define __DMA_H__
 
 
+//#include "common.h"
 #include "gpio.h"
 
 /* DMA - Register accessors */
@@ -235,6 +236,14 @@ typedef enum
   DMA_UART5_Rx,
   DMA_UART5_Tx,
 }DMA_REQUEST_SOURCE;
+
+
+
+
+#define GPIO_BYT0_PDIR(gpio)  (((PLACE_type *)&GPIO_PDIR_REG(gpio))->place[0])
+#define GPIO_BYT1_PDIR(gpio)  (((PLACE_type *)&GPIO_PDIR_REG(gpio))->place[1])
+#define GPIO_BYT2_PDIR(gpio)  (((PLACE_type *)&GPIO_PDIR_REG(gpio))->place[2])
+#define GPIO_BYT3_PDIR(gpio)  (((PLACE_type *)&GPIO_PDIR_REG(gpio))->place[3])
 
 #define  DMA_IRQ_EN(DMA_CHn)    NVIC_EnableIRQ((IRQn_Type)((IRQn_Type)DMA_CHn + DMA0_DMA16_IRQn))               //允许DMA通道传输完成中断
 #define  DMA_IRQ_DIS(DMA_CHn)   NVIC_DisableIRQ((IRQn_Type)((IRQn_Type)DMA_CHn + DMA0_DMA16_IRQn))              //禁止DMA通道传输完成中断

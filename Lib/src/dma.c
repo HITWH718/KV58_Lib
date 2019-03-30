@@ -1,5 +1,7 @@
 #include "dma.h"
-
+#include "MKV58F24.h"
+//#include "common.h"
+#include "port.h"
 
 //static void dma_gpio_input_init(void *SADDR,uint8 BYTEs)
 //{
@@ -44,14 +46,14 @@
                     dma_portx2buff_init(DMA_CH0, &GPIO_PDIR_REG(GPIOD), buff, PTA7, DMA_BYTE1, 10 ,DADDR_RECOVER,DMA_PERIPHERAL_TO_MEMORY);
                     //DMA初始化，源地址：&GPIO_PDIR_REG(GPIOD)，目的地址：buff,PTA7触发(默认上升沿)，每次传输1字节，共传输 10次 ，传输结束后恢复地址
 
-                    port_init(PTA7,AsGpio | DMA_FALLING);             //默认触发源是上升沿，此处改为 下降沿触发
+                    port_init(PTA7,ALT1 | DMA_FALLING);             //默认触发源是上升沿，此处改为 下降沿触发
 
                     DMA_EN(DMA_CH0);                //需要使能 DMA 后才能传输数据
  */
 void dma_portx2buff_init(DMA_CHn CHn, void *SADDR, void *DADDR, PTXn_e ptxn, DMA_BYTEn byten, uint32_t count, uint32_t cfg, DMA_TYPE type)
 {
   uint8_t BYTEs = (byten == DMA_BYTE1 ? 1 : (byten == DMA_BYTE2 ? 2 : (byten == DMA_BYTE4 ? 4 : 16 ) ) ); //计算传输字节数
-  //ASSERT(count < 0x8000,"count too big");                                                                               //断言，最大只支持0x7FFF
+  assert(count < 0x8000);                                                                               //断言，最大只支持0x7FFF
   
   SIM_SCGC7 |= SIM_SCGC7_DMA_MASK;                                                                    //打开DMA模块时钟
   SIM_SCGC6 |= SIM_SCGC6_DMAMUX_MASK;
@@ -74,8 +76,7 @@ void dma_portx2buff_init(DMA_CHn CHn, void *SADDR, void *DADDR, PTXn_e ptxn, DMA
     DMA_DOFF_REG(DMA0,CHn)  =    0x00u;                              
     break; 
   default:
-    ;
-    //ASSERT(0,"DMA Type Error");
+    assert(0);
   }
   DMA_ATTR_REG(DMA0,CHn)  =    (0
                          | DMA_ATTR_SMOD(0x0)               // 源地址模数禁止  Source address modulo feature is disabled
