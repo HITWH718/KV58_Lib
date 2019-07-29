@@ -1,4 +1,5 @@
 #include "gpio.h"
+#include "assert.h"
 
 static GPIO_Type * const GPIOX[] = GPIO_BASE_PTRS;
 

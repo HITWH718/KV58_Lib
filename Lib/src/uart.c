@@ -1,8 +1,8 @@
-
 #include "uart.h"
 #include "port_cfg.h"
 #include "stdio.h"
-#include "clock.h"
+
+uint32_t fastperiphral_clk_khz = 235000/2;
 
 static UART_Type * const UARTn[] = UART_BASE_PTRS;
 
@@ -172,6 +172,12 @@ void uart_deinit(UARTn_e uartn)
     }
 }
 
+uint8_t uart_getchar(UARTn_e uartn)
+{
+    while(!(UARTn[uartn]->S1 & UART_S1_RDRF_MASK));
+    return (UARTn[uartn]->D);
+}
+
 void uart_getbuff(UARTn_e uartn, uint8_t *buff, uint32_t len)
 {
     while(len--)
@@ -213,7 +219,55 @@ void uart_putstr(UARTn_e uartn, const uint8_t *str)
 void uart_rx_irq_en(UARTn_e uartn)
 {
     UARTn[uartn]->C2 |= UART_C2_RIE_MASK;
-    NVIC_EnableIRQ((IRQn_Type)((uartn << 1) + UART0_RX_TX_IRQn));  //Multiplied By 2
+    //NVIC_EnableIRQ((IRQn_Type)((uartn << 1) + UART0_RX_TX_IRQn));  //Multiplied By 2
+    switch(uartn)
+    {
+    case uart0:
+        NVIC_EnableIRQ(UART0_RX_TX_IRQn);
+        break;
+    case uart1:
+        NVIC_EnableIRQ(UART1_RX_TX_IRQn);
+        break;
+    case uart2:
+        NVIC_EnableIRQ(UART2_RX_TX_IRQn);
+        break;
+    case uart3:
+        NVIC_EnableIRQ(UART3_RX_TX_IRQn);
+        break;
+    case uart4:
+        NVIC_EnableIRQ(UART4_RX_TX_IRQn);
+        break;
+    case uart5:
+        NVIC_EnableIRQ(UART5_RX_TX_IRQn);
+        break;
+    }
+}
+
+void uart_rx_irq_dis(UARTn_e uartn)
+{
+    UARTn[uartn]->C2 &= ~UART_C2_RIE_MASK;
+    //NVIC_DisableIRQ((IRQn_Type)((uartn << 1) + UART0_RX_TX_IRQn));
+    switch(uartn)
+    {
+    case uart0:
+        NVIC_DisableIRQ(UART0_RX_TX_IRQn);
+        break;
+    case uart1:
+        NVIC_DisableIRQ(UART1_RX_TX_IRQn);
+        break;
+    case uart2:
+        NVIC_DisableIRQ(UART2_RX_TX_IRQn);
+        break;
+    case uart3:
+        NVIC_DisableIRQ(UART3_RX_TX_IRQn);
+        break;
+    case uart4:
+        NVIC_DisableIRQ(UART4_RX_TX_IRQn);
+        break;
+    case uart5:
+        NVIC_DisableIRQ(UART5_RX_TX_IRQn);
+        break;
+    }
 }
 
 void uart_tx_irq_en(UARTn_e uartn)
@@ -222,6 +276,12 @@ void uart_tx_irq_en(UARTn_e uartn)
     NVIC_EnableIRQ((IRQn_Type)((uartn << 1) + UART0_RX_TX_IRQn));  //Multiplied By 2
 }
 
+void uart_tx_irq_dis(UARTn_e uartn)
+{
+    UARTn[uartn]->C2 &= ~UART_C2_TIE_MASK;
+    NVIC_DisableIRQ((IRQn_Type)((uartn << 1) + UART0_RX_TX_IRQn));
+}
+/*
 void UART0_RX_TX_IRQHandler(void)
 {
     if(UARTn[0]->S1 & UART_S1_RDRF_MASK)
@@ -233,6 +293,7 @@ void UART0_RX_TX_IRQHandler(void)
 
     }
 }
+*/
 
 int fputc(int ch,FILE*stream)
 {

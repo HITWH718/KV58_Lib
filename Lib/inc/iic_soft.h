@@ -5,7 +5,7 @@
 
 //IIC 引脚宏定义
 #define IIC_SCL        PTE2
-#define IIC_SDA        PTE3
+#define IIC_SDA        PTE1
 
 //IIC 引脚控制宏定义
 #define SDA()          gpio_get(IIC_SDA)

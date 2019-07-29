@@ -1,7 +1,5 @@
 #include "port.h"
 
-static PORT_Type *const PORTx[] = PORT_BASE_PTRS;
-
 void port_init(PTXn_e ptxn, uint32_t cfg)
 {
     //打开端口时钟

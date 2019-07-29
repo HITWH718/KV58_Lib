@@ -1,8 +1,9 @@
 #ifndef _PORT_H_
 #define _PORT_H_
 
-#include "fsl_common.h"
+#include "MKV58F24.h"
 
+static PORT_Type *const PORTx[] = PORT_BASE_PTRS;
 
 //PORT寄存器
 #define PORT_PCR_REG(base,index)                 ((base)->PCR[index])
@@ -12,14 +13,6 @@
 #define PORT_DFER_REG(base)                      ((base)->DFER)
 #define PORT_DFCR_REG(base)                      ((base)->DFCR)
 #define PORT_DFWR_REG(base)                      ((base)->DFWR)
-//SIM寄存器
-#define SIM_SCGC1                                ((SIM)->SCGC1)
-#define SIM_SCGC2                                ((SIM)->SCGC2)
-#define SIM_SCGC3                                ((SIM)->SCGC3)
-#define SIM_SCGC4                                ((SIM)->SCGC4)
-#define SIM_SCGC5                                ((SIM)->SCGC5)
-#define SIM_SCGC6                                ((SIM)->SCGC6)
-#define SIM_SCGC7                                ((SIM)->SCGC7)
 
 typedef enum _port_mux
 {

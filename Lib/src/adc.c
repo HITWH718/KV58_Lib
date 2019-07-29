@@ -1,6 +1,6 @@
 #include "adc.h"
 #include "port.h"
-#include "fsl_common.h"
+#include "assert.h"
 
 static void     adc_start   (ADCn_Ch_e, ADC_nbit);    //¿ªÊ¼adc×ª»»
 

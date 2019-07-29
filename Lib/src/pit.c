@@ -9,7 +9,7 @@ void pit_delay(PITn_e pitn,uint32_t count)
     /* Enable the clock */
     PIT->MCR &= ~(PIT_MCR_MDIS_MASK);
     /* Set timer period */
-    PIT->CHANNEL[pitn].LDVAL = 23750 * count;
+    PIT->CHANNEL[pitn].LDVAL = 23500 * count;
     /* Start pit */
     PIT->CHANNEL[pitn].TCTRL |= PIT_TCTRL_TEN_MASK;
     /* Wait for time */
@@ -25,7 +25,7 @@ void pit_init(PITn_e pitn,uint32_t count)
     /* Enable the clock */
     PIT->MCR &= ~(PIT_MCR_MDIS_MASK);
     /* Set timer period */
-    PIT->CHANNEL[pitn].LDVAL = 23750 * count;
+    PIT->CHANNEL[pitn].LDVAL = 23500 * count;
     /* Enable timer interrupts */
     PIT->CHANNEL[pitn].TCTRL |= PIT_TCTRL_TIE_MASK;
     /* Enable at the NVIC */
@@ -34,14 +34,14 @@ void pit_init(PITn_e pitn,uint32_t count)
     PIT->CHANNEL[pitn].TCTRL |= PIT_TCTRL_TEN_MASK;
 }
 
-void PIT0_IRQHandler(void)
-{
-    /* Clear interrupt flag.*/
-    pit_flag_clr(pit0);
-    /* for user */
-    static uint8_t a = 0;
-    if(a==2){a=0;}
-    if(a==0){gpio_set(PTE29,0);}
-    if(a==1){gpio_set(PTE29,1);}
-    a++;
-}
+//void PIT0_IRQHandler(void)
+//{
+//    /* Clear interrupt flag.*/
+//   pit_flag_clr(pit0);
+//    /* for user */
+//    static uint8_t a = 0;
+//    if(a==2){a=0;}
+//    if(a==0){gpio_set(PTE29,0);}
+//    if(a==1){gpio_set(PTE29,1);}
+//    a++;
+//}

@@ -106,6 +106,31 @@ void SPI_write_16bit(uint16_t c)
     }
 }
 
+uint8_t SPI_read_reg(uint8_t dev_add, uint8_t reg)
+{
+    uint8_t data;
+
+	SPI_enable(SPI_ENABLE);
+    SPI_write((dev_add<<1) | 0x00);  //发送器件地址加写位
+	SPI_write(reg);   				  //发送从机寄存器地址
+
+	SPI_enable(SPI_ENABLE);                       //IIC重启（由发送变为接收需要重启IIC）
+	SPI_write((dev_add<<1) | 0x01);    //发送器件地址加读位
+	data = SPI_read();   				//发送需要写入的数据
+	SPI_enable(0);
+
+	return data;
+}
+
+void SPI_write_reg(uint8_t dev_add, uint8_t reg, uint8_t data)
+{
+    SPI_enable(SPI_ENABLE);
+    SPI_write((dev_add<<1) | 0x00);  //发送器件地址加写位
+	SPI_write(reg);   				 //发送从机寄存器地址
+	SPI_write(data);   				 //发送需要写入的数据
+	SPI_enable(0);
+}
+
 /*!
  *  @brief      SPI初始化
  *  @return     void
@@ -117,4 +142,9 @@ void SPI_init()
     gpio_init(SPI_MISO, GPI, 0);
     gpio_init(SPI_SCK, GPO, 0);
     gpio_init(SPI_NSS, GPO, 0);
+
+//    port_init_NoALT(SPI_MOSI, OD | PULLUP);
+//    port_init_NoALT(SPI_MISO, OD | PULLUP);
+//    port_init_NoALT(SPI_SCK, OD | PULLUP);
+//    port_init_NoALT(SPI_NSS, OD | PULLUP);
 }

@@ -1,6 +1,6 @@
-
 #include "ftm.h"
 #include "port_cfg.h"
+#include "assert.h"
 
 static FTM_Type * const FTMn[] = FTM_BASE_PTRS;
 static uint16_t period[4];
@@ -274,7 +274,7 @@ void ftm_pwm_init(FTMn_e ftmn, FTM_CHn_e ch, uint32_t freq)
     FTMn[ftmn]->CONTROLS[ch].CnSC = FTM_CnSC_MSB_MASK | FTM_CnSC_ELSB_MASK;
     /* Set the clock prescale factor */
     FTMn[ftmn]->SC |= FTM_SC_PS(7);
-    freq_ftm = (237500000/256);
+    freq_ftm = (235000000/256);
     /* Select the clock source */
     FTMn[ftmn]->SC |= FTM_SC_CLKS(1);
     /* Calculate the MOD */
@@ -390,7 +390,9 @@ void ftm_quad_init(FTMn_e ftmn)
 int16_t ftm_quad_get(FTMn_e ftmn)
 {
     assert(ftmn == ftm1 || ftmn == ftm2);
-    return FTMn[ftmn]->CNT;
+    int16_t val = FTMn[ftmn]->CNT;
+    FTMn[ftmn]->CNT = 0;
+    return val;
 }
 
 void ftm_quad_clean(FTMn_e ftmn)

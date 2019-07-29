@@ -1,9 +1,9 @@
 #ifndef _GPIO_H_
 #define _GPIO_H_
 
-#include "fsl_common.h"
+#include "MKV58F24.h"
 #include "port.h"
-
+#include "assert.h"
 
 /**
  *  @brief 变量的位清0和置1

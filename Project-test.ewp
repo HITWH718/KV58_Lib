@@ -353,6 +353,7 @@
                     <state>$PROJ_DIR$\App\inc</state>
                     <state>$PROJ_DIR$\Board\inc</state>
                     <state>$PROJ_DIR$\Chip\inc</state>
+                    <state>$PROJ_DIR$\Sys\inc</state>
                     <state>$PROJ_DIR$\Lib\CMSIS\inc</state>
                     <state>$PROJ_DIR$\Chip\inc\iar</state>
                     <state>$PROJ_DIR$\Lib\inc</state>
@@ -423,7 +424,7 @@
                 </option>
                 <option>
                     <name>IccCppInlineSemantics</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IccCmsis</name>
@@ -2102,29 +2103,14 @@
     </group>
     <group>
         <name>Lib</name>
-        <group>
-            <name>CMSIS</name>
-        </group>
-        <group>
-            <name>Fatfs</name>
-        </group>
         <file>
             <name>$PROJ_DIR$\Lib\src\adc.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\clock.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Lib\src\dma.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Lib\src\flash.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_clock.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Lib\src\fsl_common.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Lib\src\ftm.c</name>
@@ -2161,6 +2147,21 @@
         </file>
         <file>
             <name>$PROJ_DIR$\Lib\src\uart.c</name>
+        </file>
+    </group>
+    <group>
+        <name>Sys</name>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\clock_config.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_clock.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_common.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_smc.c</name>
         </file>
     </group>
 </project>

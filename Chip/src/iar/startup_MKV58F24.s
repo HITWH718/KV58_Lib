@@ -1,45 +1,39 @@
-; -------------------------------------------------------------------------
+; ---------------------------------------------------------------------------------------
 ;  @file:    startup_MKV58F24.s
 ;  @purpose: CMSIS Cortex-M7 Core Device Startup File
 ;            MKV58F24
 ;  @version: 0.3
 ;  @date:    2016-2-29
-;  @build:   b171205
-; -------------------------------------------------------------------------
+;  @build:   b160229
+; ---------------------------------------------------------------------------------------
 ;
-; The Clear BSD License
-; Copyright 1997-2016 Freescale Semiconductor, Inc.
-; Copyright 2016-2017 NXP
+; Copyright (c) 1997 - 2016 , Freescale Semiconductor, Inc.
 ; All rights reserved.
 ;
-; Redistribution and use in source and binary forms, with or without
-; modification, are permitted (subject to the limitations in the
-; disclaimer below) provided that the following conditions are met:
+; Redistribution and use in source and binary forms, with or without modification,
+; are permitted provided that the following conditions are met:
 ;
-; * Redistributions of source code must retain the above copyright
-;   notice, this list of conditions and the following disclaimer.
+; o Redistributions of source code must retain the above copyright notice, this list
+;   of conditions and the following disclaimer.
 ;
-; * Redistributions in binary form must reproduce the above copyright
-;   notice, this list of conditions and the following disclaimer in the
-;   documentation and/or other materials provided with the distribution.
+; o Redistributions in binary form must reproduce the above copyright notice, this
+;   list of conditions and the following disclaimer in the documentation and/or
+;   other materials provided with the distribution.
 ;
-; * Neither the name of the copyright holder nor the names of its
-;   contributors may be used to endorse or promote products derived from
-;   this software without specific prior written permission.
+; o Neither the name of Freescale Semiconductor, Inc. nor the names of its
+;   contributors may be used to endorse or promote products derived from this
+;   software without specific prior written permission.
 ;
-; NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE
-; GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
-; HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
-; WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-; MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-; DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-; LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-; CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-; SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
-; BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-; WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
-; OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
-; IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+; ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+; WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+; DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+; ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+; (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+; ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+; (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ;
 ; The modules in this file are included in the libraries, and may be replaced
 ; by any user-defined modules that define the PUBLIC symbol _program_start or
@@ -65,6 +59,7 @@
 
         EXTERN  __iar_program_start
         EXTERN  SystemInit
+        EXTERN  init_data_bss
         PUBLIC  __vector_table
         PUBLIC  __vector_table_0x1c
         PUBLIC  __Vectors
@@ -338,14 +333,14 @@ __Vectors_End
 
         SECTION FlashConfig:CODE
 __FlashConfig
-        DCD 0xFFFFFFFF
-        DCD 0xFFFFFFFF
-        DCD 0xFFFFFFFF
-        DCD 0xFFFFFFFE
+      	DCD	0xFFFFFFFF
+      	DCD	0xFFFFFFFF
+      	DCD	0xFFFFFFFF
+      	DCD	0xFFFFFFFE
 __FlashConfig_End
 
 __Vectors       EQU   __vector_table
-__Vectors_Size  EQU   __Vectors_End - __Vectors
+__Vectors_Size 	EQU   __Vectors_End - __Vectors
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -358,12 +353,9 @@ __Vectors_Size  EQU   __Vectors_End - __Vectors
         SECTION .text:CODE:REORDER:NOROOT(2)
 Reset_Handler
         CPSID   I               ; Mask interrupts
-        LDR     R0, =0xE000ED08
-        LDR     R1, =__vector_table
-        STR     R1, [R0]
-        LDR     R2, [R1]
-        MSR     MSP, R2
         LDR     R0, =SystemInit
+        BLX     R0
+        LDR     R0, =init_data_bss
         BLX     R0
         CPSIE   I               ; Unmask interrupts
         LDR     R0, =__iar_program_start
@@ -415,124 +407,22 @@ SysTick_Handler
         B .
 
         PUBWEAK DMA0_DMA16_IRQHandler
-        PUBWEAK DMA0_DMA16_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA0_DMA16_IRQHandler
-        LDR     R0, =DMA0_DMA16_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA1_DMA17_IRQHandler
-        PUBWEAK DMA1_DMA17_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA1_DMA17_IRQHandler
-        LDR     R0, =DMA1_DMA17_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA2_DMA18_IRQHandler
-        PUBWEAK DMA2_DMA18_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA2_DMA18_IRQHandler
-        LDR     R0, =DMA2_DMA18_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA3_DMA19_IRQHandler
-        PUBWEAK DMA3_DMA19_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA3_DMA19_IRQHandler
-        LDR     R0, =DMA3_DMA19_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA4_DMA20_IRQHandler
-        PUBWEAK DMA4_DMA20_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA4_DMA20_IRQHandler
-        LDR     R0, =DMA4_DMA20_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA5_DMA21_IRQHandler
-        PUBWEAK DMA5_DMA21_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA5_DMA21_IRQHandler
-        LDR     R0, =DMA5_DMA21_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA6_DMA22_IRQHandler
-        PUBWEAK DMA6_DMA22_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA6_DMA22_IRQHandler
-        LDR     R0, =DMA6_DMA22_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA7_DMA23_IRQHandler
-        PUBWEAK DMA7_DMA23_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA7_DMA23_IRQHandler
-        LDR     R0, =DMA7_DMA23_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA8_DMA24_IRQHandler
-        PUBWEAK DMA8_DMA24_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA8_DMA24_IRQHandler
-        LDR     R0, =DMA8_DMA24_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA9_DMA25_IRQHandler
-        PUBWEAK DMA9_DMA25_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA9_DMA25_IRQHandler
-        LDR     R0, =DMA9_DMA25_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA10_DMA26_IRQHandler
-        PUBWEAK DMA10_DMA26_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA10_DMA26_IRQHandler
-        LDR     R0, =DMA10_DMA26_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA11_DMA27_IRQHandler
-        PUBWEAK DMA11_DMA27_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA11_DMA27_IRQHandler
-        LDR     R0, =DMA11_DMA27_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA12_DMA28_IRQHandler
-        PUBWEAK DMA12_DMA28_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA12_DMA28_IRQHandler
-        LDR     R0, =DMA12_DMA28_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA13_DMA29_IRQHandler
-        PUBWEAK DMA13_DMA29_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA13_DMA29_IRQHandler
-        LDR     R0, =DMA13_DMA29_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA14_DMA30_IRQHandler
-        PUBWEAK DMA14_DMA30_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA14_DMA30_IRQHandler
-        LDR     R0, =DMA14_DMA30_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA15_DMA31_IRQHandler
-        PUBWEAK DMA15_DMA31_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA15_DMA31_IRQHandler
-        LDR     R0, =DMA15_DMA31_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DMA_Error_IRQHandler
-        PUBWEAK DMA_Error_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-DMA_Error_IRQHandler
-        LDR     R0, =DMA_Error_DriverIRQHandler
-        BX      R0
-
         PUBWEAK MCM_IRQHandler
         PUBWEAK FTFE_IRQHandler
         PUBWEAK Read_Collision_IRQHandler
@@ -541,90 +431,18 @@ DMA_Error_IRQHandler
         PUBWEAK WDOG_EWM_IRQHandler
         PUBWEAK TRNG0_IRQHandler
         PUBWEAK I2C0_IRQHandler
-        PUBWEAK I2C0_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-I2C0_IRQHandler
-        LDR     R0, =I2C0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK I2C1_IRQHandler
-        PUBWEAK I2C1_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-I2C1_IRQHandler
-        LDR     R0, =I2C1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK SPI0_IRQHandler
-        PUBWEAK SPI0_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-SPI0_IRQHandler
-        LDR     R0, =SPI0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK SPI1_IRQHandler
-        PUBWEAK SPI1_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-SPI1_IRQHandler
-        LDR     R0, =SPI1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART5_RX_TX_IRQHandler
-        PUBWEAK UART5_RX_TX_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART5_RX_TX_IRQHandler
-        LDR     R0, =UART5_RX_TX_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART5_ERR_IRQHandler
-        PUBWEAK UART5_ERR_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART5_ERR_IRQHandler
-        LDR     R0, =UART5_ERR_DriverIRQHandler
-        BX      R0
-
         PUBWEAK Reserved46_IRQHandler
         PUBWEAK UART0_RX_TX_IRQHandler
-        PUBWEAK UART0_RX_TX_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART0_RX_TX_IRQHandler
-        LDR     R0, =UART0_RX_TX_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART0_ERR_IRQHandler
-        PUBWEAK UART0_ERR_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART0_ERR_IRQHandler
-        LDR     R0, =UART0_ERR_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART1_RX_TX_IRQHandler
-        PUBWEAK UART1_RX_TX_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART1_RX_TX_IRQHandler
-        LDR     R0, =UART1_RX_TX_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART1_ERR_IRQHandler
-        PUBWEAK UART1_ERR_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART1_ERR_IRQHandler
-        LDR     R0, =UART1_ERR_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART2_RX_TX_IRQHandler
-        PUBWEAK UART2_RX_TX_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART2_RX_TX_IRQHandler
-        LDR     R0, =UART2_RX_TX_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART2_ERR_IRQHandler
-        PUBWEAK UART2_ERR_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART2_ERR_IRQHandler
-        LDR     R0, =UART2_ERR_DriverIRQHandler
-        BX      R0
-
         PUBWEAK ADC0_IRQHandler
         PUBWEAK HSADC_ERR_IRQHandler
         PUBWEAK HSADC0_CCA_IRQHandler
@@ -633,33 +451,9 @@ UART2_ERR_IRQHandler
         PUBWEAK FTM0_IRQHandler
         PUBWEAK FTM1_IRQHandler
         PUBWEAK UART3_RX_TX_IRQHandler
-        PUBWEAK UART3_RX_TX_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART3_RX_TX_IRQHandler
-        LDR     R0, =UART3_RX_TX_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART3_ERR_IRQHandler
-        PUBWEAK UART3_ERR_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART3_ERR_IRQHandler
-        LDR     R0, =UART3_ERR_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART4_RX_TX_IRQHandler
-        PUBWEAK UART4_RX_TX_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART4_RX_TX_IRQHandler
-        LDR     R0, =UART4_RX_TX_DriverIRQHandler
-        BX      R0
-
         PUBWEAK UART4_ERR_IRQHandler
-        PUBWEAK UART4_ERR_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-UART4_ERR_IRQHandler
-        LDR     R0, =UART4_ERR_DriverIRQHandler
-        BX      R0
-
         PUBWEAK PIT0_IRQHandler
         PUBWEAK PIT1_IRQHandler
         PUBWEAK PIT2_IRQHandler
@@ -678,12 +472,6 @@ UART4_ERR_IRQHandler
         PUBWEAK PORTE_IRQHandler
         PUBWEAK SWI_IRQHandler
         PUBWEAK SPI2_IRQHandler
-        PUBWEAK SPI2_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-SPI2_IRQHandler
-        LDR     R0, =SPI2_DriverIRQHandler
-        BX      R0
-
         PUBWEAK ENC_COMPARE_IRQHandler
         PUBWEAK ENC_HOME_IRQHandler
         PUBWEAK ENC_WDOG_SAB_IRQHandler
@@ -694,42 +482,11 @@ SPI2_IRQHandler
         PUBWEAK HSADC0_CCB_IRQHandler
         PUBWEAK HSADC1_CCA_IRQHandler
         PUBWEAK CAN0_ORed_Message_buffer_IRQHandler
-        PUBWEAK CAN0_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN0_ORed_Message_buffer_IRQHandler
-        LDR     R0, =CAN0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN0_Bus_Off_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN0_Bus_Off_IRQHandler
-        LDR     R0, =CAN0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN0_Error_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN0_Error_IRQHandler
-        LDR     R0, =CAN0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN0_Tx_Warning_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN0_Tx_Warning_IRQHandler
-        LDR     R0, =CAN0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN0_Rx_Warning_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN0_Rx_Warning_IRQHandler
-        LDR     R0, =CAN0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN0_Wake_Up_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN0_Wake_Up_IRQHandler
-        LDR     R0, =CAN0_DriverIRQHandler
-        BX      R0
-
         PUBWEAK PWM0_CMP0_IRQHandler
         PUBWEAK PWM0_RELOAD0_IRQHandler
         PUBWEAK PWM0_CMP1_IRQHandler
@@ -744,70 +501,15 @@ CAN0_Wake_Up_IRQHandler
         PUBWEAK CMP3_IRQHandler
         PUBWEAK HSADC1_CCB_IRQHandler
         PUBWEAK CAN1_ORed_Message_buffer_IRQHandler
-        PUBWEAK CAN1_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN1_ORed_Message_buffer_IRQHandler
-        LDR     R0, =CAN1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN1_Bus_Off_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN1_Bus_Off_IRQHandler
-        LDR     R0, =CAN1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN1_Error_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN1_Error_IRQHandler
-        LDR     R0, =CAN1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN1_Tx_Warning_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN1_Tx_Warning_IRQHandler
-        LDR     R0, =CAN1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN1_Rx_Warning_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN1_Rx_Warning_IRQHandler
-        LDR     R0, =CAN1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN1_Wake_Up_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN1_Wake_Up_IRQHandler
-        LDR     R0, =CAN1_DriverIRQHandler
-        BX      R0
-
         PUBWEAK ENET_1588_Timer_IRQHandler
-        PUBWEAK ENET_1588_Timer_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-ENET_1588_Timer_IRQHandler
-        LDR     R0, =ENET_1588_Timer_DriverIRQHandler
-        BX      R0
-
         PUBWEAK ENET_Transmit_IRQHandler
-        PUBWEAK ENET_Transmit_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-ENET_Transmit_IRQHandler
-        LDR     R0, =ENET_Transmit_DriverIRQHandler
-        BX      R0
-
         PUBWEAK ENET_Receive_IRQHandler
-        PUBWEAK ENET_Receive_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-ENET_Receive_IRQHandler
-        LDR     R0, =ENET_Receive_DriverIRQHandler
-        BX      R0
-
         PUBWEAK ENET_Error_IRQHandler
-        PUBWEAK ENET_Error_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-ENET_Error_IRQHandler
-        LDR     R0, =ENET_Error_DriverIRQHandler
-        BX      R0
-
         PUBWEAK PWM1_CMP0_IRQHandler
         PUBWEAK PWM1_RELOAD0_IRQHandler
         PUBWEAK PWM1_CMP1_IRQHandler
@@ -820,61 +522,30 @@ ENET_Error_IRQHandler
         PUBWEAK PWM1_RERR_IRQHandler
         PUBWEAK PWM1_FAULT_IRQHandler
         PUBWEAK CAN2_ORed_Message_buffer_IRQHandler
-        PUBWEAK CAN2_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_ORed_Message_buffer_IRQHandler
-        LDR     R0, =CAN2_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN2_Bus_Off_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_Bus_Off_IRQHandler
-        LDR     R0, =CAN2_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN2_Error_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_Error_IRQHandler
-        LDR     R0, =CAN2_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN2_Tx_Warning_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_Tx_Warning_IRQHandler
-        LDR     R0, =CAN2_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN2_Rx_Warning_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_Rx_Warning_IRQHandler
-        LDR     R0, =CAN2_DriverIRQHandler
-        BX      R0
-
         PUBWEAK CAN2_Wake_Up_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_Wake_Up_IRQHandler
-        LDR     R0, =CAN2_DriverIRQHandler
-        BX      R0
-
         PUBWEAK DefaultISR
         SECTION .text:CODE:REORDER:NOROOT(1)
-DMA0_DMA16_DriverIRQHandler
-DMA1_DMA17_DriverIRQHandler
-DMA2_DMA18_DriverIRQHandler
-DMA3_DMA19_DriverIRQHandler
-DMA4_DMA20_DriverIRQHandler
-DMA5_DMA21_DriverIRQHandler
-DMA6_DMA22_DriverIRQHandler
-DMA7_DMA23_DriverIRQHandler
-DMA8_DMA24_DriverIRQHandler
-DMA9_DMA25_DriverIRQHandler
-DMA10_DMA26_DriverIRQHandler
-DMA11_DMA27_DriverIRQHandler
-DMA12_DMA28_DriverIRQHandler
-DMA13_DMA29_DriverIRQHandler
-DMA14_DMA30_DriverIRQHandler
-DMA15_DMA31_DriverIRQHandler
-DMA_Error_DriverIRQHandler
+DMA0_DMA16_IRQHandler
+DMA1_DMA17_IRQHandler
+DMA2_DMA18_IRQHandler
+DMA3_DMA19_IRQHandler
+DMA4_DMA20_IRQHandler
+DMA5_DMA21_IRQHandler
+DMA6_DMA22_IRQHandler
+DMA7_DMA23_IRQHandler
+DMA8_DMA24_IRQHandler
+DMA9_DMA25_IRQHandler
+DMA10_DMA26_IRQHandler
+DMA11_DMA27_IRQHandler
+DMA12_DMA28_IRQHandler
+DMA13_DMA29_IRQHandler
+DMA14_DMA30_IRQHandler
+DMA15_DMA31_IRQHandler
+DMA_Error_IRQHandler
 MCM_IRQHandler
 FTFE_IRQHandler
 Read_Collision_IRQHandler
@@ -882,19 +553,19 @@ PMC_IRQHandler
 LLWU_IRQHandler
 WDOG_EWM_IRQHandler
 TRNG0_IRQHandler
-I2C0_DriverIRQHandler
-I2C1_DriverIRQHandler
-SPI0_DriverIRQHandler
-SPI1_DriverIRQHandler
-UART5_RX_TX_DriverIRQHandler
-UART5_ERR_DriverIRQHandler
+I2C0_IRQHandler
+I2C1_IRQHandler
+SPI0_IRQHandler
+SPI1_IRQHandler
+UART5_RX_TX_IRQHandler
+UART5_ERR_IRQHandler
 Reserved46_IRQHandler
-UART0_RX_TX_DriverIRQHandler
-UART0_ERR_DriverIRQHandler
-UART1_RX_TX_DriverIRQHandler
-UART1_ERR_DriverIRQHandler
-UART2_RX_TX_DriverIRQHandler
-UART2_ERR_DriverIRQHandler
+UART0_RX_TX_IRQHandler
+UART0_ERR_IRQHandler
+UART1_RX_TX_IRQHandler
+UART1_ERR_IRQHandler
+UART2_RX_TX_IRQHandler
+UART2_ERR_IRQHandler
 ADC0_IRQHandler
 HSADC_ERR_IRQHandler
 HSADC0_CCA_IRQHandler
@@ -902,10 +573,10 @@ CMP0_IRQHandler
 CMP1_IRQHandler
 FTM0_IRQHandler
 FTM1_IRQHandler
-UART3_RX_TX_DriverIRQHandler
-UART3_ERR_DriverIRQHandler
-UART4_RX_TX_DriverIRQHandler
-UART4_ERR_DriverIRQHandler
+UART3_RX_TX_IRQHandler
+UART3_ERR_IRQHandler
+UART4_RX_TX_IRQHandler
+UART4_ERR_IRQHandler
 PIT0_IRQHandler
 PIT1_IRQHandler
 PIT2_IRQHandler
@@ -923,7 +594,7 @@ PORTC_IRQHandler
 PORTD_IRQHandler
 PORTE_IRQHandler
 SWI_IRQHandler
-SPI2_DriverIRQHandler
+SPI2_IRQHandler
 ENC_COMPARE_IRQHandler
 ENC_HOME_IRQHandler
 ENC_WDOG_SAB_IRQHandler
@@ -933,7 +604,12 @@ FTM3_IRQHandler
 Reserved88_IRQHandler
 HSADC0_CCB_IRQHandler
 HSADC1_CCA_IRQHandler
-CAN0_DriverIRQHandler
+CAN0_ORed_Message_buffer_IRQHandler
+CAN0_Bus_Off_IRQHandler
+CAN0_Error_IRQHandler
+CAN0_Tx_Warning_IRQHandler
+CAN0_Rx_Warning_IRQHandler
+CAN0_Wake_Up_IRQHandler
 PWM0_CMP0_IRQHandler
 PWM0_RELOAD0_IRQHandler
 PWM0_CMP1_IRQHandler
@@ -947,11 +623,16 @@ PWM0_RERR_IRQHandler
 PWM0_FAULT_IRQHandler
 CMP3_IRQHandler
 HSADC1_CCB_IRQHandler
-CAN1_DriverIRQHandler
-ENET_1588_Timer_DriverIRQHandler
-ENET_Transmit_DriverIRQHandler
-ENET_Receive_DriverIRQHandler
-ENET_Error_DriverIRQHandler
+CAN1_ORed_Message_buffer_IRQHandler
+CAN1_Bus_Off_IRQHandler
+CAN1_Error_IRQHandler
+CAN1_Tx_Warning_IRQHandler
+CAN1_Rx_Warning_IRQHandler
+CAN1_Wake_Up_IRQHandler
+ENET_1588_Timer_IRQHandler
+ENET_Transmit_IRQHandler
+ENET_Receive_IRQHandler
+ENET_Error_IRQHandler
 PWM1_CMP0_IRQHandler
 PWM1_RELOAD0_IRQHandler
 PWM1_CMP1_IRQHandler
@@ -963,7 +644,12 @@ PWM1_RELOAD3_IRQHandler
 PWM1_CAP_IRQHandler
 PWM1_RERR_IRQHandler
 PWM1_FAULT_IRQHandler
-CAN2_DriverIRQHandler
+CAN2_ORed_Message_buffer_IRQHandler
+CAN2_Bus_Off_IRQHandler
+CAN2_Error_IRQHandler
+CAN2_Tx_Warning_IRQHandler
+CAN2_Rx_Warning_IRQHandler
+CAN2_Wake_Up_IRQHandler
 DefaultISR
         B DefaultISR
 

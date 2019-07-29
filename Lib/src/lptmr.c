@@ -6,22 +6,23 @@
  * @date       2019-01-22
  */
 #include "lptmr.h"
-#include "MKV58F24.h"
+
+
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_pulse_init                                                        
-//功  能: LPTMR脉冲计数初始化                                                        
+//函数名: LPTMR_pulse_init
+//功  能: LPTMR脉冲计数初始化
 //参  数: LPT0_ALTn:LPTMR脉冲计数管脚
 //        count   :LPTMR脉冲比较值
 //        LPT_CFG :LPTMR脉冲计数方式：上升沿计数或下降沿计数
-//返  回: 无                                                              
-//简  例:  LPTMR_pulse_init(LPT0_ALT1,32768,LPT_Rising);                                
+//返  回: 无
+//简  例:  LPTMR_pulse_init(LPT0_ALT1,32768,LPT_Rising);
 //-------------------------------------------------------------------------*
 void LPTMR_Pulse_Init(LPT0_ALTn altn, uint16 count, LPT_CFG cfg)
-{    
+{
 
-  
+
     ((SIM)->SCGC5) |= SIM_SCGC5_LPTMR_MASK;   //使能LPT模块时钟
-    
+
     if(altn == LPT0_ALT1)  //设置输入管脚
     {
            ((PORTA)->PCR[19])= PORT_PCR_MUX(0x6); //管脚PORTA19
@@ -32,13 +33,13 @@ void LPTMR_Pulse_Init(LPT0_ALTn altn, uint16 count, LPT_CFG cfg)
     }
     else                                    //不可能发生事件
     {
-       ;  
+       ;
     }
 
      // 清状态寄存器
      ((LPTMR0)->CSR)= 0x00;    //需要先关闭LPT配置时钟分频 设置时钟分频等
 
-     
+
       //选择时钟源
       ((LPTMR0)->PSR)  =   ( 0  | LPTMR_PSR_PCS(1)                  //选择时钟源： 0 为 MCGIRCLK ，1为 LPO（1KHz） ，2为 ERCLK32K ，3为 OSCERCLK
                                 | LPTMR_PSR_PBYP_MASK               //旁路 预分频/干扰滤波器 ,即不用 预分频/干扰滤波器(注释了表示使用预分频/干扰滤波器)
@@ -61,10 +62,10 @@ void LPTMR_Pulse_Init(LPT0_ALTn altn, uint16 count, LPT_CFG cfg)
 }
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_pulse_get                                                        
-//功  能: 获取LPTMR脉冲计数值                                                        
-//返  回: 脉冲计数值                                                              
-//简  例: 无                                
+//函数名: LPTMR_pulse_get
+//功  能: 获取LPTMR脉冲计数值
+//返  回: 脉冲计数值
+//简  例: 无
 //-------------------------------------------------------------------------*
 uint16 LPTMR_Pulse_Get(void)
 {
@@ -82,11 +83,11 @@ uint16 LPTMR_Pulse_Get(void)
 
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_pulse_clean                                                        
-//功  能: 清空LPTMR脉冲计数                                                        
+//函数名: LPTMR_pulse_clean
+//功  能: 清空LPTMR脉冲计数
 //参  数: 无
-//返  回: 无                                                              
-//简  例: 无                                
+//返  回: 无
+//简  例: 无
 //-------------------------------------------------------------------------*
 void LPTMR_Pulse_Clean(void)
 {
@@ -95,11 +96,11 @@ void LPTMR_Pulse_Clean(void)
 }
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_delay_ms                                                        
-//功  能: LPTMR延时函数（ms）                                                        
+//函数名: LPTMR_delay_ms
+//功  能: LPTMR延时函数（ms）
 //参  数: ms    毫秒
-//返  回: 无                                                              
-//简  例: LPTMR_delay_ms(32);     // LPTMR 延时32ms                                
+//返  回: 无
+//简  例: LPTMR_delay_ms(32);     // LPTMR 延时32ms
 //-------------------------------------------------------------------------*
 void LPTMR_delay_ms(uint16 ms)
 {
@@ -139,13 +140,13 @@ void LPTMR_delay_ms(uint16 ms)
 }
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_timing_ms                                                        
-//功  能: LPTMR定时函数（ms）                                                        
+//函数名: LPTMR_timing_ms
+//功  能: LPTMR定时函数（ms）
 //参  数: ms          LPTMR定时时间(0~65535)
-//返  回: 无                                                              
+//返  回: 无
 //简  例:  LPTMR_timing_ms(32);                                // LPTMR 定时 32ms
 //         set_vector_handler(LPTimer_VECTORn,lptmr_hander);   // 设置中断复位函数到中断向量表里
-//         enable_irq(LPTimer_IRQn);                           // 使能LPTMR中断                            
+//         enable_irq(LPTimer_IRQn);                           // 使能LPTMR中断
 //-------------------------------------------------------------------------*
 void LPTMR_timing_ms(uint16 ms)
 {
@@ -177,16 +178,16 @@ void LPTMR_timing_ms(uint16 ms)
                     //| LPTMR_CSR_TFC_MASK      //0:计数值等于比较值就复位；1：溢出复位（注释表示0）
                    );
 
-    return;                    
+    return;
 }
 
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_delay_us                                                        
-//功  能: LPTMR延时函数（us）                                                        
+//函数名: LPTMR_delay_us
+//功  能: LPTMR延时函数（us）
 //参  数: us          LPTMR延时时间(0~41942)
-//返  回: 无                                                              
-//简  例:  LPTMR_delay_us(32);     // LPTMR 延时32us                              
+//返  回: 无
+//简  例:  LPTMR_delay_us(32);     // LPTMR 延时32us
 //-------------------------------------------------------------------------*
 void LPTMR_delay_us(uint16 us)
 {
@@ -226,21 +227,21 @@ void LPTMR_delay_us(uint16 us)
 
    ((LPTMR0)->CSR) &= ~LPTMR_CSR_TEN_MASK;          //清除比较标志位
 
-    
+
 }
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_timing_us                                                        
-//功  能: LPTMR定时函数（us）                                                        
+//函数名: LPTMR_timing_us
+//功  能: LPTMR定时函数（us）
 //参  数: us        LPTMR定时时间(0~41942)
-//返  回: 无                                                              
+//返  回: 无
 //简  例:   lptmr_timing_us(32);     // LPTMR 定时32us
 //          set_vector_handler(LPTimer_VECTORn,lptmr_hander);   // 设置中断复位函数到中断向量表里
-//          enable_irq(LPTimer_IRQn);                           // 使能LPTMR中断                     
+//          enable_irq(LPTimer_IRQn);                           // 使能LPTMR中断
 //-------------------------------------------------------------------------*
 void LPTMR_timing_us(uint16 us)
 {
-   
+
     if(us == 0)
     {
         return;
@@ -273,14 +274,14 @@ void LPTMR_timing_us(uint16 us)
                     //| LPTMR_CSR_TFC_MASK      //0:计数值等于比较值就复位；1：溢出复位（注释表示0）
                    );
 
-   return;                    
+   return;
 }
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_time_start_ms                                                        
-//功  能: 开始LPTMR计时                                                        
+//函数名: LPTMR_time_start_ms
+//功  能: 开始LPTMR计时
 //参  数: 无
-//返  回: 无                                                             
-//简  例: LPTMR_time_start_ms();                      
+//返  回: 无
+//简  例: LPTMR_time_start_ms();
 //-------------------------------------------------------------------------*
 void LPTMR_time_start_ms(void)
 {
@@ -306,16 +307,16 @@ void LPTMR_time_start_ms(void)
                     //| LPTMR_CSR_TIE_MASK      //中断使能
                     //| LPTMR_CSR_TFC_MASK      //0:计数值等于比较值就复位；1：溢出复位（注释表示0）
                    );
-    
+
 }
 
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_time_get_ms                                                        
-//功  能: 获取LPTMR计时时间（ms）                                                        
+//函数名: LPTMR_time_get_ms
+//功  能: 获取LPTMR计时时间（ms）
 //参  数: 无
-//返  回: 计时时间（返回值为 ~0 表示计时超时，其他值在 0~ 65534ms 区间内 ）                                                              
-//简  例: 参考 LPTMR_time_start_ms 的调用例子                          
+//返  回: 计时时间（返回值为 ~0 表示计时超时，其他值在 0~ 65534ms 区间内 ）
+//简  例: 参考 LPTMR_time_start_ms 的调用例子
 //-------------------------------------------------------------------------*
 
 uint32 LPTMR_time_get_ms(void)
@@ -336,22 +337,22 @@ uint32 LPTMR_time_get_ms(void)
 }
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_time_close                                                        
-//功  能: 关闭 LPTMR计时                                                        
+//函数名: LPTMR_time_close
+//功  能: 关闭 LPTMR计时
 //参  数: 无
-//返  回: 无                                                              
-//简  例: 无                        
+//返  回: 无
+//简  例: 无
 //-------------------------------------------------------------------------*
 void LPTMR_time_close()
 {
     ((LPTMR0)->CSR) = 0x00;                                          //先关了LPT，自动清计数器的值，清空溢出标记
 }
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_time_start_us                                                        
-//功  能: 开始LPTMR计时                                                        
+//函数名: LPTMR_time_start_us
+//功  能: 开始LPTMR计时
 //参  数: 无
-//返  回: 无                                                             
-//简  例: LPTMR_time_start_ms();                      
+//返  回: 无
+//简  例: LPTMR_time_start_ms();
 //-------------------------------------------------------------------------*
 void LPTMR_time_start_us(void)
 {
@@ -385,11 +386,11 @@ void LPTMR_time_start_us(void)
 
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_time_get_us                                                        
-//功  能: 获取LPTMR计时时间（us）                                                        
+//函数名: LPTMR_time_get_us
+//功  能: 获取LPTMR计时时间（us）
 //参  数: 无
-//返  回: 计时时间（返回值为 ~0 表示计时超时，其他值在 0~ 41942us 区间内 ）                                                              
-//简  例: 参考 LPTMR_time_start_us 的调用例子                          
+//返  回: 计时时间（返回值为 ~0 表示计时超时，其他值在 0~ 41942us 区间内 ）
+//简  例: 参考 LPTMR_time_start_us 的调用例子
 //-------------------------------------------------------------------------*
 uint32 LPTMR_time_get_us(void)
 {
@@ -412,11 +413,11 @@ uint32 LPTMR_time_get_us(void)
 
 
 //-------------------------------------------------------------------------*
-//函数名: LPTMR_interrupt                                                        
-//功  能: LPTMR定时中断函数                                                        
+//函数名: LPTMR_interrupt
+//功  能: LPTMR定时中断函数
 //参  数: 无
-//返  回: 无                                                              
-//简  例: 无                               
+//返  回: 无
+//简  例: 无
 //-------------------------------------------------------------------------*
 void LPTMR0_IRQHandler(void)
 {

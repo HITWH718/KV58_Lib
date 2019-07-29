@@ -1,5 +1,7 @@
 #ifndef __SYSTICK_H__
 #define __SYSTICK_H__
+
+#include "MKV58F24.h"
 #include <stdint.h>
 
 typedef struct

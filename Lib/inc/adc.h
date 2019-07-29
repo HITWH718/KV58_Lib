@@ -1,25 +1,24 @@
 #ifndef _ADC_H_
 #define _ADC_H_
 
-#include "headfile.h"
 #include "MKV58F24.h"
 
 typedef enum
 {
-    //ADC µÄAÍ¨µÀ¼È¿ÉÒÔÈí¼ş´¥·¢Ò²¿ÉÒÔÓ²¼ş´¥·¢
-    //ADC µÄBÍ¨µÀÖ»ÄÜÓ²¼ş´¥·¢
-    //²Î¿¼ÊÖ²áp910 40.1.3.1 ADC0 Channel Assignment for 144-Pin Package
-    // -------------------------------ADC0 20181218È·ÈÏ-------------------------
+    //ADC çš„Aé€šé“æ—¢å¯ä»¥è½¯ä»¶è§¦å‘ä¹Ÿå¯ä»¥ç¡¬ä»¶è§¦å‘
+    //ADC çš„Bé€šé“åªèƒ½ç¡¬ä»¶è§¦å‘
+    //å‚è€ƒæ‰‹å†Œp910 40.1.3.1 ADC0 Channel Assignment for 144-Pin Package
+    // -------------------------------ADC0 20181218ç¡®è®¤-------------------------
     ADC0_DP0=0,    //ADC0_SE0
     ADC0_DP1=1,    //PTE16
     ADC0_DP2=2,    //PTE4
     ADC0_DP3=3,    //PTE11
-    //ADC0_CFG2 &=~ADC_CFG2_MUXSEL_MASK   0Ñ¡Ôña  0 ADxxa channels are selected.
+    //ADC0_CFG2 &=~ADC_CFG2_MUXSEL_MASK   0é€‰æ‹©a  0 ADxxa channels are selected.
     ADC0_SE4a=4,   //PTE6
     ADC0_SE5a=5,   //PTE18
     ADC0_SE6a=6,   //PTE19
     ADC0_SE7a=7,   //HSADC0A_CH6
-    //ADC0_CFG2 |=ADC_CFG2_MUXSEL_MASK    1Ñ¡Ôñb  1 ADxxb channels are selected.
+    //ADC0_CFG2 |=ADC_CFG2_MUXSEL_MASK    1é€‰æ‹©b  1 ADxxb channels are selected.
     ADC0_SE4b=12,  //HSADC0A_CH7
     ADC0_SE5b=13,  //PTE20
     ADC0_SE6b=14,  //PTB4
@@ -30,7 +29,7 @@ typedef enum
     ADC0_SE11=11,  //PTE12
 }ADCn_Ch_e;
 
-//¾«¶ÈÎ»Êı
+//ç²¾åº¦ä½æ•°
 typedef enum ADC_nbit
 {
     ADC_8bit   = 0x00,
@@ -40,10 +39,10 @@ typedef enum ADC_nbit
 } ADC_nbit;
 
 
-//Íâ²¿º¯Êı½Ó¿ÚÉùÃ÷
-extern void adc_init (ADCn_Ch_e);                //ADC³õÊ¼»¯
-extern uint16_t adc_once (ADCn_Ch_e, ADC_nbit);      //²É¼¯Ò»´ÎÒ»Â·Ä£ÄâÁ¿µÄADÖµ
+//å¤–éƒ¨å‡½æ•°æ¥å£å£°æ˜
+extern void adc_init (ADCn_Ch_e);                //ADCåˆå§‹åŒ–
+extern uint16_t adc_once (ADCn_Ch_e, ADC_nbit);      //é‡‡é›†ä¸€æ¬¡ä¸€è·¯æ¨¡æ‹Ÿé‡çš„ADå€¼
 extern uint16_t adc_average (ADCn_Ch_e adcn_ch, ADC_nbit bit, uint8_t times);
-extern void adc_stop();                   //Í£Ö¹ADC×ª»»
+extern void adc_stop();                   //åœæ­¢ADCè½¬æ¢
 
 #endif
