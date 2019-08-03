@@ -12,5 +12,6 @@
 #include "ftm.h"
 #include "adc.h"
 #include "stdio.h"
+#include "flash.h"
 
 #endif

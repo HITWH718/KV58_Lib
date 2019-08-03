@@ -17784,7 +17784,7 @@ typedef struct {
 #define SIM_SCGC6_REG(base)                      ((base)->SCGC6)
 #define SIM_SCGC7_REG(base)                      ((base)->SCGC7)
 #define SIM_CLKDIV1_REG(base)                    ((base)->CLKDIV1)
-#define SIM_FCFG1_REG(base)                      ((base)->FCFG1)
+//#define SIM_FCFG1_REG(base)                      ((base)->FCFG1)
 #define SIM_FCFG2_REG(base)                      ((base)->FCFG2)
 #define SIM_UIDH_REG(base)                       ((base)->UIDH)
 #define SIM_UIDMH_REG(base)                      ((base)->UIDMH)

@@ -2381,6 +2381,9 @@
     <group>
         <name>Chip</name>
         <file>
+            <name>$PROJ_DIR$\Chip\src\iar\startup.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Chip\src\iar\startup_MKV58F24.s</name>
         </file>
         <file>
@@ -2445,6 +2448,27 @@
         </file>
         <file>
             <name>$PROJ_DIR$\Sys\src\fsl_common.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_flash.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_ftfx_adapter.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_ftfx_cache.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_ftfx_controller.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_ftfx_features.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_ftfx_flash.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_ftfx_utilities.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Sys\src\fsl_smc.c</name>

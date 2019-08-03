@@ -220,10 +220,16 @@
                 <debug>1</debug>
                 <option>
                     <name>CCDefines</name>
-                    <state>CPU_MKV58F1M0VLQ24</state>
                     <state>DEBUG</state>
+                    <state>CPU_MKV58F1M0VLQ24</state>
                     <state>TWR_KV58F220M</state>
                     <state>TOWER</state>
+                    <state>_DLIB_FILE_DESCRIPTOR</state>
+                    <state>CPU_MKV58F1M0VLQ24_cm7</state>
+                    <state>FSL_RTOS_FREE_RTOS</state>
+                    <state>SDK_OS_FREE_RTOS</state>
+                    <state>SDK_CORE_ID_CORE0</state>
+                    <state>TWR_KV58F220M</state>
                     <state>PRINTF_FLOAT_ENABLE=1</state>
                     <state>PRINTF_ADVANCED_ENABLE=1</state>
                 </option>
@@ -661,7 +667,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>Project-test.hex</state>
+                    <state>KV58_Lib.hex</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -716,7 +722,7 @@
                 </option>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>Project-test.out</state>
+                    <state>KV58_Lib.out</state>
                 </option>
                 <option>
                     <name>IlinkDebugInfoEnable</name>
@@ -1013,7 +1019,7 @@
                 </option>
                 <option>
                     <name>IlinkTrustzoneImportLibraryOut</name>
-                    <state>Project-test_import_lib.o</state>
+                    <state>KV58_Lib_import_lib.o</state>
                 </option>
                 <option>
                     <name>OILinkExtraOption</name>
@@ -2095,6 +2101,9 @@
     <group>
         <name>Chip</name>
         <file>
+            <name>$PROJ_DIR$\Chip\src\iar\startup.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Chip\src\iar\startup_MKV58F24.s</name>
         </file>
         <file>
@@ -2159,6 +2168,27 @@
         </file>
         <file>
             <name>$PROJ_DIR$\Sys\src\fsl_common.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_flash.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_ftfx_adapter.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_ftfx_cache.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_ftfx_controller.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_ftfx_features.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\src\fsl_ftfx_flash.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Sys\inc\fsl_ftfx_utilities.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Sys\src\fsl_smc.c</name>
